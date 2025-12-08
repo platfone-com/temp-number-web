@@ -1,0 +1,16 @@
+.slide-header-enter-active,
+.slide-header-leave-active {
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+.slide-header-enter-from,
+.slide-header-leave-to {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+.slide-header-enter-to,
+.slide-header-leave-from {
+  transform: translateY(0%);
+  opacity: 1;
+}

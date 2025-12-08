@@ -1,0 +1,14 @@
+.backdrop-enter-from,
+.backdrop-leave-to {
+  opacity: 0;
+}
+
+.backdrop-enter-to,
+.backdrop-leave-from {
+  opacity: 1;
+}
+
+.backdrop-enter-active,
+.backdrop-leave-active {
+  transition: opacity 0.3s ease-in-out;
+}

@@ -1,7 +1,6 @@
 <script lang="ts" setup>
   import { computed, type ComputedRef } from 'vue'
   import config from '@/config'
-  import { useWlHelper } from '@/composables/wl/useWlHelper'
 
   interface MenuItem {
     text: string
@@ -12,32 +11,24 @@
 
   const emit = defineEmits(['closeSidebar'])
 
-  const { wlHelperTermsUrl, wlHelperPrivacyUrl } = useWlHelper()
-
   const menuItems: ComputedRef<MenuItem[]> = computed(() => {
-    const staticItems: MenuItem[] = [
-      {
-        text: 'web_refund_policy',
-        url: 'https://help.temp-number.org/en/article/refund-policy-1ma49c2/',
-        target: '_blank'
-      }
-    ]
-    let specificItems: MenuItem[] = []
+    let menuItems: MenuItem[] = []
     if (config.wlWidgetMode) {
-      specificItems = [
+      const platfoneBaseUrl = import.meta.env.VITE_PLATFONE_BASE_URL
+      menuItems = [
         {
           text: 'web_privacy_policy',
-          url: wlHelperPrivacyUrl.value,
+          url: `${platfoneBaseUrl}/compliance#privacy`,
           target: '_blank'
         },
         {
           text: 'web_terms_of_service',
-          url: wlHelperTermsUrl.value,
+          url: `${platfoneBaseUrl}/compliance#terms`,
           target: '_blank'
         }
       ]
     } else {
-      specificItems = [
+      menuItems = [
         {
           text: 'web_privacy_policy',
           routeName: 'Privacy'
@@ -45,11 +36,16 @@
         {
           text: 'web_terms_of_service',
           routeName: 'Terms'
+        },
+        {
+          text: 'web_refund_policy',
+          url: 'https://help.temp-number.org/en/article/refund-policy-1ma49c2/',
+          target: '_blank'
         }
       ]
     }
 
-    return [...specificItems, ...staticItems]
+    return menuItems
   })
 </script>
 

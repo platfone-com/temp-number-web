@@ -43,6 +43,14 @@ The easiest way to get started is using our **[temp-number-deploy](https://githu
 
 👉 **[Go to temp-number-deploy →](https://github.com/platfone-com/temp-number-deploy)**
 
+
+▶ [Watch the guide on YouTube](https://youtu.be/SXoU-PhTg5U)
+<p align="center">
+  <a href="https://youtu.be/SXoU-PhTg5U">
+    <img src="https://img.youtube.com/vi/SXoU-PhTg5U/hqdefault.jpg" alt="Temp-Number iOS guide video" />
+  </a>
+</p>
+
 ### Manual Installation
 
 For manual setup or custom configurations:

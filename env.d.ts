@@ -12,6 +12,7 @@ interface ImportMetaEnv {
   readonly VITE_TELEGRAM_BOT_ID: string
   readonly VITE_RECAPTCHA_ENTERPRISE_ENABLED?: '1' | '0'
   readonly VITE_RECAPTCHA_ENTERPRISE_SITE_KEY?: string
+  readonly VITE_ALIPAY_QQ_WECHAT_STORE_URL?: string
 }
 
 interface ImportMeta {

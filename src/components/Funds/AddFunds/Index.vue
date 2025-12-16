@@ -16,6 +16,7 @@
   import Select from '@/components/Shared/Select.vue'
   import RadioButton from '@/components/Shared/RadioButton.vue'
   import Button from '@/components/Shared/Button.vue'
+  import AlipayQqWechatForm from '@/components/Funds/AddFunds/Form/AlipayQqWechat.vue'
   import AnypayForm from '@/components/Funds/AddFunds/Form/Anypay.vue'
   import PayeerForm from '@/components/Funds/AddFunds/Form/Payeer.vue'
 
@@ -171,38 +172,41 @@
       <Select :selected="selectedGateway" :items="gatewaysList" @select-item="selectItem" />
     </div>
 
-    <div class="tn:flex tn:flex-col tn:gap-2">
-      <div class="tn:text-sm tn:font-medium">{{ $t('web_add_funds_payment_amount') }}</div>
-      <RadioButton
-        v-for="amountItem in amounts"
-        @click="selectedAmount = amountItem"
-        :key="amountItem"
-        :text="$t('web_add_funds_buy_0_credits').replace('__0__', amountItem.toString())"
-        :is-active="selectedAmount === amountItem"
-      />
-      <input
-        v-model="customAmount"
-        @focus="selectedAmount = 0"
-        @keydown="blockDecimalInput"
-        :placeholder="$t('web_add_funds_enter_custom_amount')"
-        type="number"
-        :min="minAmount"
-        :max="maxAmount"
-        :class="[
-          'tn:bg-tn-black-50 tn:border-tn-black-50 tn:focus:border-primary-900 tn:rounded-2xl tn:border tn:px-5 tn:py-3.75 tn:text-sm tn:outline-none',
-          customAmount && !selectedAmount && 'tn:!border-primary-900'
-        ]"
-      />
-    </div>
+    <AlipayQqWechatForm v-if="selectedGateway === Gateway.alipay_qq_wechat" />
+    <template v-else>
+      <div class="tn:flex tn:flex-col tn:gap-2">
+        <div class="tn:text-sm tn:font-medium">{{ $t('web_add_funds_payment_amount') }}</div>
+        <RadioButton
+          v-for="amountItem in amounts"
+          @click="selectedAmount = amountItem"
+          :key="amountItem"
+          :text="$t('web_add_funds_buy_0_credits').replace('__0__', amountItem.toString())"
+          :is-active="selectedAmount === amountItem"
+        />
+        <input
+          v-model="customAmount"
+          @focus="selectedAmount = 0"
+          @keydown="blockDecimalInput"
+          :placeholder="$t('web_add_funds_enter_custom_amount')"
+          type="number"
+          :min="minAmount"
+          :max="maxAmount"
+          :class="[
+            'tn:bg-tn-black-50 tn:border-tn-black-50 tn:focus:border-primary-900 tn:rounded-2xl tn:border tn:px-5 tn:py-3.75 tn:text-sm tn:outline-none',
+            customAmount && !selectedAmount && 'tn:!border-primary-900'
+          ]"
+        />
+      </div>
 
-    <div
-      v-html="addBreakLinesToText($t('web_add_funds_notict_balance_in_usd_1_credit_1_usd'))"
-      class="tn:text-center tn:text-sm tn:leading-5.5 tn:opacity-60"
-    />
+      <div
+        v-html="addBreakLinesToText($t('web_add_funds_notict_balance_in_usd_1_credit_1_usd'))"
+        class="tn:text-center tn:text-sm tn:leading-5.5 tn:opacity-60"
+      />
 
-    <Button @click="buyCredits" fill :loading="loading" :disabled="isPayButtonDisabled">
-      {{ $t('web_add_funds_cta_button_buy_credits') }}
-    </Button>
+      <Button @click="buyCredits" fill :loading="loading" :disabled="isPayButtonDisabled">
+        {{ $t('web_add_funds_cta_button_buy_credits') }}
+      </Button>
+    </template>
   </div>
 
   <AnypayForm :anypay-payment="anypayPayment" :amount="amountValue" @clear-anypay="anypayPayment = false" />

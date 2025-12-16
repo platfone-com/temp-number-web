@@ -21,6 +21,10 @@
       type: String,
       default: ''
     },
+    target: {
+      type: String as PropType<'_blank' | '_self' | '_parent' | '_top'>,
+      default: '_self'
+    },
     fill: {
       type: Boolean,
       default: false
@@ -78,7 +82,7 @@
   <router-link v-if="to" :to="typeof to === 'string' ? { name: to } : to" :class="classes">
     <slot />
   </router-link>
-  <a v-else-if="href" :href="href" :class="classes">
+  <a v-else-if="href" :href="href" :class="classes" :target="target" rel="noopener noreferrer">
     <slot />
   </a>
   <button v-else :type="buttonType" :class="classes" :disabled="disabled || loading">

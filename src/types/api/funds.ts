@@ -5,7 +5,8 @@ export enum Gateway {
   paypal = 'paypal',
   crypto = 'crypto',
   anypay = 'anypay',
-  payeer = 'payeer'
+  payeer = 'payeer',
+  alipay_qq_wechat = 'alipay_qq_wechat'
 }
 
 export interface IBalanceData {

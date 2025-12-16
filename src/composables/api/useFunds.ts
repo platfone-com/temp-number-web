@@ -44,6 +44,10 @@ export function useFunds() {
     {
       id: Gateway.anypay,
       text: t('web_omethod_dropdown_ther')
+    },
+    {
+      id: Gateway.alipay_qq_wechat,
+      text: 'AliPay, QQ, WeChat'
     }
   ])
 
@@ -150,6 +154,20 @@ export function useFunds() {
     return data?.status || ''
   }
 
+  const createAlipayQqWechatPayment = async (
+    coupon: string,
+    recaptchaToken: string
+  ): Promise<'success' | 'error' | null> => {
+    const { data, error } = await post<ISuccessResponse>('/alipayQqWechat-createPayment', {
+      coupon,
+      recaptchaToken,
+      platform: 'web'
+    })
+    if (data?.result === 'success') return 'success'
+    if (error && error.status) return 'error'
+    return null
+  }
+
   return {
     gateways,
     enabledGateways,
@@ -161,6 +179,7 @@ export function useFunds() {
     createCryptomusPayment,
     createAnypayPayment,
     createPayeerPayment,
-    getStripePaymentIntentStatus
+    getStripePaymentIntentStatus,
+    createAlipayQqWechatPayment
   }
 }

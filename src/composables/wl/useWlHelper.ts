@@ -7,7 +7,7 @@ export function useWlHelper() {
   const isWlHelperUrl = () => false
   const isWlAuthUrl = () => false
   const isWlPaymentUrl = () => false
-  const handleSuccessWlAuth = async () => {}
+  const handleSuccessWlAuth = async (forceTokenRefresh?: boolean) => {}
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleUnauthorizedWlAction = async (action: string) => {}
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

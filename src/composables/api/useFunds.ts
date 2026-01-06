@@ -47,7 +47,7 @@ export function useFunds() {
     },
     {
       id: Gateway.alipay_qq_wechat,
-      text: 'AliPay, QQ, WeChat'
+      text: t('web_alipay_qq_we_chat')
     }
   ])
 

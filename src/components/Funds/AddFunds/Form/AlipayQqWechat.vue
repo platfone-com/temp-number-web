@@ -51,19 +51,25 @@
 <template>
   <div class="tn:flex tn:flex-col tn:gap-2 tn:mt-3.5">
     <div class="tn:text-sm tn:font-medium">
-      1. Simply click the link below, select the amount, and complete your payment:
+      {{ $t('web_1_click_the_button_below_select_an_amount_and_complete_your_payment') }}
     </div>
-    <Button :href="storeUrl" target="_blank" class="tn:!py-3.75 tn:!text-sm">Pay via AliPay, QQ, WeChat</Button>
+    <Button :href="storeUrl" target="_blank" class="tn:!py-3.75 tn:!text-sm">
+      {{ $t('web_pay_via_alipay_qq_we_chat') }}
+    </Button>
   </div>
   <div class="tn:flex tn:flex-col tn:gap-2 tn:mt-2">
-    <div class="tn:text-sm tn:font-medium">2. Enter the paid coupon to top up your balance:</div>
+    <div class="tn:text-sm tn:font-medium">
+      {{ $t('web_2_enter_your_coupon_code_to_top_up_your_balance') }}
+    </div>
     <input
       v-model="coupon"
-      placeholder="Enter coupon"
+      :placeholder="$t('web_enter_coupon_code')"
       :class="[
         'tn:bg-tn-black-50 tn:border-tn-black-50 tn:focus:border-primary-900 tn:rounded-2xl tn:border tn:px-5 tn:py-3.75 tn:text-sm tn:outline-none'
       ]"
     />
   </div>
-  <Button @click="applyCoupon" fill :loading="loading" :disabled="isPayButtonDisabled">Apply Coupon</Button>
+  <Button @click="applyCoupon" fill :loading="loading" :disabled="isPayButtonDisabled">
+    {{ $t('web_apply_coupon') }}
+  </Button>
 </template>

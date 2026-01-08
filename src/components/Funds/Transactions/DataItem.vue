@@ -40,6 +40,7 @@
       'binance': t('gw_mapping__crypto'),
       'mivion': t('gw_mapping__mivion'),
       'alipay_qq_wechat': t('web_alipay_qq_we_chat'),
+      'wenjishou': t('web_alipay_qq_we_chat'),
       'perfectMoney': t('gw_mapping__perfect_money'),
       'anypayCard': t('gw_mapping__anypay')
     }

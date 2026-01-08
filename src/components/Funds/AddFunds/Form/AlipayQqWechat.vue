@@ -30,10 +30,7 @@
 
   const applyCoupon = async () => {
     appStore.fundsLoading = true
-    let recaptchaToken = ''
-    if (!isWlHelperUrl()) {
-      recaptchaToken = await getRecaptchaToken(`alipay_qq_wechat_payment`)
-    }
+    const recaptchaToken = await getRecaptchaToken(`alipay_qq_wechat_payment`)
     let result: 'success' | 'error' | null
     if (isWlHelperUrl()) {
       result = await createWLAlipayQqWechatPayment(coupon.value, recaptchaToken)

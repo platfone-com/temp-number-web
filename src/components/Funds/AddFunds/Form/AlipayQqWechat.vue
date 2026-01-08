@@ -5,6 +5,7 @@
   import { useRecaptcha } from '@/composables/useRecaptcha'
   import { useWlHelper } from '@/composables/wl/useWlHelper'
   import { useFunds } from '@/composables/api/useFunds'
+  import { useWlApiPayments } from '@/composables/wl/api/useWlApiPayments'
   import { useFundsHelper } from '@/composables/useFundsHelper'
   import Button from '@/components/Shared/Button.vue'
 
@@ -12,9 +13,14 @@
   const { getRecaptchaToken } = useRecaptcha()
   const { isWlHelperUrl } = useWlHelper()
   const { createAlipayQqWechatPayment } = useFunds()
+  const { createWLAlipayQqWechatPayment } = useWlApiPayments()
   const { handleSuccessPayment, handlePaymentError, getMobilePaymentFullReturnUrl } = useFundsHelper()
 
-  const storeUrl = import.meta.env.VITE_ALIPAY_QQ_WECHAT_STORE_URL || ''
+  const alipayStoreUrl = import.meta.env.VITE_ALIPAY_QQ_WECHAT_STORE_URL || ''
+  const wlAlipayStoreUrl = import.meta.env.VITE_WL_ALIPAY_QQ_WECHAT_STORE_URL || ''
+  const storeUrl = computed(() => {
+    return isWlHelperUrl() ? wlAlipayStoreUrl : alipayStoreUrl
+  })
   const loading = storeToRefs(appStore).fundsLoading
   const coupon = ref('')
   const isPayButtonDisabled = computed(() => {
@@ -24,10 +30,13 @@
 
   const applyCoupon = async () => {
     appStore.fundsLoading = true
-    const recaptchaToken = await getRecaptchaToken(`alipay_qq_wechat_payment`)
-    let result: 'success' | 'error' | null = null
+    let recaptchaToken = ''
+    if (!isWlHelperUrl()) {
+      recaptchaToken = await getRecaptchaToken(`alipay_qq_wechat_payment`)
+    }
+    let result: 'success' | 'error' | null
     if (isWlHelperUrl()) {
-      // result = await createWLAlipayQqWechatPayment(amountValue.value, recaptchaToken.value)
+      result = await createWLAlipayQqWechatPayment(coupon.value, recaptchaToken)
     } else {
       result = await createAlipayQqWechatPayment(coupon.value, recaptchaToken)
     }

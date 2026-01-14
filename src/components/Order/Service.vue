@@ -3,6 +3,7 @@
   import { useRoute } from 'vue-router'
   import { storeToRefs } from 'pinia'
   import { useI18n } from 'vue-i18n'
+  import config from '@/config'
   import { useOrderStore } from '@/stores/order'
   import { useAppStore } from '@/stores/app'
   import { useCatalog } from '@/composables/api/useCatalog'
@@ -65,6 +66,9 @@
   const selectService = (service: IFullServicePriceData) => {
     if (service?.count === 0 || service.prohibited) return
     orderStore.selectedService = service
+    if (config.wlWidgetMode && window.emitTnWidgetEvent) {
+      window.emitTnWidgetEvent('tn:serviceSelected', { service: service.service_id })
+    }
     orderStore.orderPrice = 0
     orderStore.orderId = ''
     if (service?.price?.suggested) {

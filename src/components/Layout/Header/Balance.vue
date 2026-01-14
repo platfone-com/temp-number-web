@@ -24,6 +24,12 @@
     'tn:cursor-pointer'
   ]
 
+  const handleFundsClick = () => {
+    if (config.wlWidgetMode && window.emitTnWidgetEvent) {
+      window.emitTnWidgetEvent('tn:addFundsStarted')
+    }
+  }
+
   onMounted(() => {
     if (isAuthenticated.value) {
       restartCheckBalance()
@@ -38,6 +44,7 @@
       :href="config.wlWidgetMode ? wlHelperFundsUrl : undefined"
       :to="!config.wlWidgetMode ? { name: 'Funds' } : undefined"
       :class="linkClass"
+      @click="handleFundsClick"
     >
       <div v-if="!totalBalance && !reservedBalance" class="tn:flex tn:items-center tn:gap-2">
         <img :src="`${cdnUrl}/images/money-bag.png`" alt="Balance Icon" class="tn:hidden tn:h-5 tn:w-5 tn:sm:block" />

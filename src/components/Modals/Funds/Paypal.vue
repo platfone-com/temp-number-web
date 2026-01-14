@@ -10,20 +10,6 @@
   import useSharedCss from '@/composables/useSharedCss'
   import Modal from '@/components/Shared/Modal.vue'
 
-  declare global {
-    interface Window {
-      paypal: {
-        Buttons: (options: {
-          createOrder: () => Promise<string | undefined>
-          onApprove: (data: { orderID: string }) => Promise<void>
-          onError?: () => void
-        }) => {
-          render: (selector: string) => void
-        }
-      }
-    }
-  }
-
   const modalStore = useModalStore()
   const { paypalClientId } = storeToRefs(useAppStore())
   const { adaptiveModalWrapperClasses } = useSharedCss()

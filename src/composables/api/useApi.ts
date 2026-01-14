@@ -86,6 +86,21 @@ export function useApi() {
       if (err.response) {
         const status = err.response.status
         const errorData = err.response?.data as IErrorResponseData
+        const reqUrl = err.response?.config?.url || ''
+        const reqBaseUrl = err.response?.config?.baseURL || ''
+        if (reqUrl === '/activation' && reqBaseUrl.includes('/wl/')) {
+          // White-label widget mode create activation error event
+          if (appConfig.wlWidgetMode && window.emitTnWidgetEvent) {
+            if (err.response.config?.data) {
+              const requestData = JSON.parse(err.response.config.data)
+              window.emitTnWidgetEvent('tn:orderFailed', {
+                country_id: requestData.country_id,
+                service_id: requestData.service_id,
+                reason: errorData?.errorName || `Unknown error (${status})`
+              })
+            }
+          }
+        }
         switch (status) {
           case 400:
             handledByInterceptor = true

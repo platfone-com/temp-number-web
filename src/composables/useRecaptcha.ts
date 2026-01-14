@@ -1,15 +1,5 @@
 import { useWlHelper } from '@/composables/wl/useWlHelper'
 
-declare global {
-  interface Window {
-    grecaptcha: {
-      enterprise: {
-        execute: (siteKey: string, options: { action: string }) => Promise<string>
-      }
-    }
-  }
-}
-
 export function useRecaptcha() {
   const { isWlHelperUrl } = useWlHelper()
   const isRecaptchaEnabled = (import.meta.env.VITE_RECAPTCHA_ENTERPRISE_ENABLED || '0') === '1'

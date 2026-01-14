@@ -66,6 +66,9 @@ export function useReport() {
 
     const apiPathUrl = config.wlWidgetMode ? `/activation/${activationId}/report` : '/app-reportActivation'
     const { data } = await post<IReportResult>(apiPathUrl, requestData, headers)
+    if (data?.status === 'accepted' && config.wlWidgetMode && window.emitTnWidgetEvent) {
+      window.emitTnWidgetEvent('tn:reportSent')
+    }
     return data || null
   }
 

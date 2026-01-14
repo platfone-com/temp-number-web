@@ -1,6 +1,7 @@
 import { useRoute, useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
+import config from '@/config'
 import { useApi } from '@/composables/api/useApi'
 import { useAuthStore } from '@/stores/auth'
 import { useOrderStore } from '@/stores/order'
@@ -13,7 +14,6 @@ import { useWindowWidth } from '@/composables/useWindowWidth'
 import { useForceOrder } from '@/composables/useForceOrder'
 import { useRecent } from '@/composables/useRecent'
 import { useWlHelper } from '@/composables/wl/useWlHelper'
-import config from '@/config'
 import type { ISuccessResponse, IErrorResponseData } from '@/types/api'
 import type { IActivation, IActivationsHistory } from '@/types/api/activation'
 
@@ -50,8 +50,15 @@ export function useActivation() {
       service_id: selectedService.value.service_id,
       country_id: selectedCountry.value.country_id
     }
-    if (config.wlWidgetMode) requestData.customer_price = orderPrice.value
-    else requestData.customer_max_price = orderPrice.value
+    if (config.wlWidgetMode) {
+      requestData.customer_price = orderPrice.value
+      if (window.emitTnWidgetEvent) {
+        window.emitTnWidgetEvent('tn:startOrder', {
+          country_id: requestData.country_id,
+          service_id: requestData.service_id
+        })
+      }
+    } else requestData.customer_max_price = orderPrice.value
 
     if (orderId.value) requestData.order_id = orderId.value
     const { data, error } = await post<IActivation>(apiPathUrl, requestData)
@@ -79,6 +86,11 @@ export function useActivation() {
       const updatedQuery = { ...route.query }
       delete updatedQuery.country
       delete updatedQuery.service
+      if (config.wlWidgetMode && window.emitTnWidgetEvent)
+        window.emitTnWidgetEvent('tn:numberReceived', {
+          country_id: data?.country_id,
+          service_id: data?.service_id
+        })
       await router.replace({ query: updatedQuery })
     }
     if (error) {
@@ -226,6 +238,12 @@ export function useActivation() {
     orderStore.cancelNumberLoading = false
     if (data && data.result === 'success') {
       modalStore.cancelNumberModal = { status: true, activation: activation, numberCanceled: true }
+      if (config.wlWidgetMode && window.emitTnWidgetEvent) {
+        window.emitTnWidgetEvent('tn:numberCancelled', {
+          country_id: activation.country_id,
+          service_id: activation.service_id
+        })
+      }
       await getActiveActivations(false)
       await restartCheckBalance()
     }

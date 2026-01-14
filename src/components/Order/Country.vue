@@ -3,6 +3,7 @@
   import { useRoute } from 'vue-router'
   import { storeToRefs } from 'pinia'
   import { useI18n } from 'vue-i18n'
+  import config from '@/config'
   import { useOrderStore } from '@/stores/order'
   import { useCatalog } from '@/composables/api/useCatalog'
   import { useForceOrder } from '@/composables/useForceOrder'
@@ -64,6 +65,9 @@
   const selectCountry = (country: IFullCountryPriceData) => {
     if (country?.count === 0) return
     orderStore.selectedCountry = country
+    if (config.wlWidgetMode && window.emitTnWidgetEvent) {
+      window.emitTnWidgetEvent('tn:countrySelected', { country: country.country_id })
+    }
     orderStore.orderPrice = 0
     orderStore.orderId = ''
     if (country?.price?.suggested) {

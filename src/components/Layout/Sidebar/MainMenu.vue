@@ -30,6 +30,13 @@
   const newOrder = () => {
     emit('closeSidebar')
   }
+
+  const handleFundsClick = () => {
+    emit('closeSidebar')
+    if (config.wlWidgetMode && window.emitTnWidgetEvent) {
+      window.emitTnWidgetEvent('tn:addFundsStarted')
+    }
+  }
 </script>
 
 <template>
@@ -68,7 +75,7 @@
           :href="config.wlWidgetMode ? wlHelperFundsUrl : undefined"
           :to="!config.wlWidgetMode ? { name: 'Funds' } : undefined"
           :class="linkClasses"
-          @click="emit('closeSidebar')"
+          @click="handleFundsClick"
         >
           <div class="tn:flex tn:w-full tn:items-center tn:justify-between">
             <div class="tn:flex tn:items-center tn:gap-4.5">

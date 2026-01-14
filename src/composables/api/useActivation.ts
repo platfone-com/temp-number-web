@@ -54,8 +54,8 @@ export function useActivation() {
       requestData.customer_price = orderPrice.value
       if (window.emitTnWidgetEvent) {
         window.emitTnWidgetEvent('tn:startOrder', {
-          country_id: requestData.country_id,
-          service_id: requestData.service_id
+          country: requestData.country_id,
+          service: requestData.service_id
         })
       }
     } else requestData.customer_max_price = orderPrice.value
@@ -88,8 +88,8 @@ export function useActivation() {
       delete updatedQuery.service
       if (config.wlWidgetMode && window.emitTnWidgetEvent)
         window.emitTnWidgetEvent('tn:numberReceived', {
-          country_id: data?.country_id,
-          service_id: data?.service_id
+          country: data?.country_id,
+          service: data?.service_id
         })
       await router.replace({ query: updatedQuery })
     }
@@ -240,8 +240,8 @@ export function useActivation() {
       modalStore.cancelNumberModal = { status: true, activation: activation, numberCanceled: true }
       if (config.wlWidgetMode && window.emitTnWidgetEvent) {
         window.emitTnWidgetEvent('tn:numberCancelled', {
-          country_id: activation.country_id,
-          service_id: activation.service_id
+          country: activation.country_id,
+          service: activation.service_id
         })
       }
       await getActiveActivations(false)

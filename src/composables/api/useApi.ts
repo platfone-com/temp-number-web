@@ -94,8 +94,8 @@ export function useApi() {
             if (err.response.config?.data) {
               const requestData = JSON.parse(err.response.config.data)
               window.emitTnWidgetEvent('tn:orderFailed', {
-                country_id: requestData.country_id,
-                service_id: requestData.service_id,
+                country: requestData.country_id,
+                service: requestData.service_id,
                 reason: errorData?.errorName || `Unknown error (${status})`
               })
             }

@@ -29,6 +29,7 @@
   })
 
   const applyCoupon = async () => {
+    if (isPayButtonDisabled.value) return
     appStore.fundsLoading = true
     const recaptchaToken = await getRecaptchaToken(`alipay_qq_wechat_payment`)
     let result: 'success' | 'error' | null
@@ -69,6 +70,7 @@
     </div>
     <input
       v-model="coupon"
+      @keyup.enter="applyCoupon"
       :placeholder="$t('web_enter_coupon_code')"
       :class="[
         'tn:bg-tn-black-50 tn:border-tn-black-50 tn:focus:border-primary-900 tn:rounded-2xl tn:border tn:px-5 tn:py-3.75 tn:text-sm tn:outline-none'

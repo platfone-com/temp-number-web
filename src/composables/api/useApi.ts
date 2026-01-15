@@ -144,7 +144,9 @@ export function useApi() {
           case 409:
             if (
               err.response?.config?.url &&
-              !['/app-createActivation', '/activation'].includes(err.response?.config?.url)
+              !['/app-createActivation', '/activation', '/alipayQqWechat-createPayment'].includes(
+                err.response?.config?.url
+              )
             ) {
               handledByInterceptor = true
               if (errorData?.errorName === 'ReportCreationDeadlinePassed') {

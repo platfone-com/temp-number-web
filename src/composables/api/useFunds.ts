@@ -160,7 +160,7 @@ export function useFunds() {
   ): Promise<'success' | 'error' | null> => {
     const { data, error } = await post<ISuccessResponse>('/alipayQqWechat-createPayment', {
       coupon,
-      recaptchaToken,
+      recaptcha_token: recaptchaToken,
       platform: 'web'
     })
     if (data?.result === 'success') return 'success'

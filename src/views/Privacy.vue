@@ -2,7 +2,7 @@
   <div class="content-page container">
     <h1 style="text-align: center">Privacy policy</h1>
     <p style="text-align: right">
-      <strong>Last update: June 1, 2023</strong><strong><br /><br /></strong>
+      <strong>Last update: February 10, 2026</strong><strong><br /><br /></strong>
     </p>
     <p>Following Privacy policy refers to Temp-Number website (temp-number.org) and mobile applications.</p>
     <p>
@@ -97,6 +97,19 @@
     <p>
       Your web browser allows you to delete cookies and disable them in the future.&nbsp; Should you delete or disable
       cookies, you may find that some of our services are unavailable to you.
+    </p>
+    <p>
+      reCAPTCHA &ndash; We use Google reCAPTCHA Enterprise to protect our service from spam, fraud, and abuse by automated
+      bots.&nbsp; When you interact with our service, reCAPTCHA may collect information including your IP address, browser
+      type and version, device information, screen resolution, operating system, user interactions (such as mouse movements,
+      keyboard patterns, and touch events), and other technical information necessary to assess whether you are a human user
+      or an automated bot.&nbsp; This data is processed by Temp-Number (operated by Privatix LTD) as the data controller,
+      with Google acting as a data processor under our instructions in accordance with the Google Cloud Data Processing
+      Addendum.&nbsp; We use this service for our legitimate interest in maintaining the security and integrity of our
+      platform, preventing fraudulent activities, and ensuring that our service is used in accordance with our Terms and
+      Conditions.&nbsp; The data collected by reCAPTCHA is used solely for security and fraud prevention purposes and is not
+      used by Google for any other purpose.&nbsp; For more information about how we protect your data, please see the Data
+      Security section below.
     </p>
     <p>&nbsp;</p>
     <h2>Third-Party Information</h2>

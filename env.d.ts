@@ -13,6 +13,7 @@ interface ImportMetaEnv {
   readonly VITE_RECAPTCHA_ENTERPRISE_ENABLED?: '1' | '0'
   readonly VITE_RECAPTCHA_ENTERPRISE_SITE_KEY?: string
   readonly VITE_ALIPAY_QQ_WECHAT_STORE_URL?: string
+  readonly VITE_CRISP_WEBSITE_ID?: string
 }
 
 interface ImportMeta {

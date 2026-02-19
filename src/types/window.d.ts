@@ -19,5 +19,8 @@ declare global {
         render: (selector: string) => void
       }
     }
+    $crisp?: Array<[string, string, ...unknown[]]>
+    CRISP_WEBSITE_ID?: string
+    CRISP_RUNTIME_CONFIG?: { locale: string }
   }
 }

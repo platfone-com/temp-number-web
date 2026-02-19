@@ -93,6 +93,7 @@ VITE_RECAPTCHA_ENTERPRISE_ENABLED=1
 VITE_RECAPTCHA_ENTERPRISE_SITE_KEY=google_recaptcha_key
 VITE_CDN_BASE_URL=your_cdn_url
 VITE_ALIPAY_QQ_WECHAT_STORE_URL=your_store_url
+VITE_CRISP_WEBSITE_ID=your_crisp_website_id
 ```
 
 ### Running the Application

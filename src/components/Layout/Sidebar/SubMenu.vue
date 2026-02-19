@@ -7,6 +7,7 @@
     routeName?: string
     url?: string
     target?: string
+    noTranslate?: boolean
   }
 
   const emit = defineEmits(['closeSidebar'])
@@ -59,7 +60,7 @@
           :to="{ name: item.routeName }"
           class="tn:hover:text-primary-900 tn:block tn:py-1 tn:text-[0.9375rem]"
         >
-          {{ $t(item.text) }}
+          {{ item.noTranslate ? item.text : $t(item.text) }}
         </router-link>
         <a
           v-else-if="item.url"
@@ -68,14 +69,21 @@
           class="tn:hover:text-primary-900 tn:block tn:py-1 tn:text-[0.9375rem]"
           :target="item.target"
         >
-          {{ $t(item.text) }}
+          {{ item.noTranslate ? item.text : $t(item.text) }}
         </a>
       </li>
-      <!--      <li v-if="proVersionUrl">-->
-      <!--        <a :href="proVersionUrl + '/api'" class="hover:text-primary-900 block py-1 text-[0.9375rem]">-->
-      <!--          {{ $t('text_625fc8bd481518015daf97b1') }}-->
-      <!--        </a>-->
-      <!--      </li>-->
+      <li v-if="!config.wlWidgetMode">
+        <router-link
+          @click="emit('closeSidebar')"
+          :to="{ name: 'API' }"
+          class="tn:hover:text-primary-900 tn:block tn:py-1 tn:text-[0.9375rem]"
+        >
+          Temp Number
+          <span class="tn:inline-block tn:px-1.5 tn:bg-primary-900 tn:rounded-lg tn:text-white tn:font-medium"
+            >API</span
+          >
+        </router-link>
+      </li>
     </ul>
   </div>
 </template>

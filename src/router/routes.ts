@@ -185,5 +185,13 @@ export default [
       layout: 'default'
     },
     component: () => import('@/views/Variables.vue')
+  },
+  {
+    path: '/api',
+    name: 'API',
+    meta: {
+      layout: 'default'
+    },
+    component: () => import('@/views/Api.vue')
   }
 ]

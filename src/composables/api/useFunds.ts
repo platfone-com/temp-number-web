@@ -3,7 +3,6 @@ import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import { useApi } from '@/composables/api/useApi'
 import { useAuthStore } from '@/stores/auth'
-import { useAppStore } from '@/stores/app'
 import config from '@/config'
 import {
   type ITransactionsData,
@@ -11,16 +10,13 @@ import {
   type IStipePaymentIntentData,
   type IPaypalOrderData,
   type ICryptomusPaymentData,
-  type IAnypayPaymentData,
-  type IStipePaymentIntentStatus,
-  type IPayeerPaymentData
+  type IStipePaymentIntentStatus
 } from '@/types/api/funds'
 import type { ISuccessResponse } from '@/types/api'
 
 export function useFunds() {
   const { t } = useI18n()
   const { get, post } = useApi()
-  const appStore = useAppStore()
 
   const { isAuthenticated } = storeToRefs(useAuthStore())
 
@@ -36,14 +32,6 @@ export function useFunds() {
     {
       id: Gateway.paypal,
       text: t('web_method_dropdown_paypal')
-    },
-    {
-      id: Gateway.payeer,
-      text: 'Payeer'
-    },
-    {
-      id: Gateway.anypay,
-      text: t('web_omethod_dropdown_ther')
     },
     {
       id: Gateway.alipay_qq_wechat,
@@ -121,30 +109,6 @@ export function useFunds() {
     }
   }
 
-  const createAnypayPayment = async (amount: number): Promise<IAnypayPaymentData | null> => {
-    appStore.fundsLoading = true
-    const { data } = await post<IAnypayPaymentData>('/anypay-createPayment', { amount })
-    appStore.fundsLoading = false
-    if (data) return data
-    return null
-  }
-
-  const createPayeerPayment = async (
-    amount: number,
-    successUrl: string,
-    failUrl: string
-  ): Promise<IPayeerPaymentData | null> => {
-    appStore.fundsLoading = true
-    const { data } = await post<IPayeerPaymentData>('/payeer-createOrder', {
-      amount,
-      success_url: successUrl,
-      fail_url: failUrl
-    })
-    appStore.fundsLoading = false
-    if (data) return data
-    return null
-  }
-
   const getStripePaymentIntentStatus = async (id: string, recaptchaToken: string): Promise<string> => {
     const { data } = await post<IStipePaymentIntentStatus>('/stripe-getPaymentIntentStatus', {
       payment_intent_id: id,
@@ -177,8 +141,6 @@ export function useFunds() {
     createPaypalOrder,
     capturePaypalOrder,
     createCryptomusPayment,
-    createAnypayPayment,
-    createPayeerPayment,
     getStripePaymentIntentStatus,
     createAlipayQqWechatPayment
   }

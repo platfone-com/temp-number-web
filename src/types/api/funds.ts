@@ -4,8 +4,6 @@ export enum Gateway {
   stripe = 'stripe',
   paypal = 'paypal',
   crypto = 'crypto',
-  anypay = 'anypay',
-  payeer = 'payeer',
   alipay_qq_wechat = 'alipay_qq_wechat'
 }
 
@@ -60,25 +58,4 @@ export interface IPublicKeys {
   stripePublishableKey: string
   paypalClientId: string
   cryptomusMerchantId: string
-}
-
-export interface IAnypayPaymentData {
-  merchant_id: number
-  pay_id: string
-  amount: number
-  currency: 'USD'
-  method: string
-  customer_id: string
-  sign: string
-}
-
-export interface IPayeerPaymentData {
-  m_shop: string
-  m_orderid: string
-  m_amount: string
-  m_curr: string
-  m_desc: string
-  m_sign: string
-  m_params: string
-  m_cipher_method: string
 }

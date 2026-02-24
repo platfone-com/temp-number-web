@@ -201,11 +201,6 @@
           .&nbsp;
         </li>
         <li aria-level="3">
-          The crypto payments on the Site process is conducted by our online reseller Payeer.com and according to their
-          Terms of Use (https://payeer.com/en/agreements/), AML/KYC (https://payeer.com/en/aml/) and Privacy Policy
-          (https://payeer.com/en/policy/)&nbsp;
-        </li>
-        <li aria-level="3">
           The crypto payments on the Site process is conducted by our online reseller Coinpayments.com and according to
           their User Agreement (https://www.coinpayments.net/help-terms), Restricted Jurisdictions Policy
           (https://www.coinpayments.net/help-restricted) and Privacy Policy

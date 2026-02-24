@@ -17,8 +17,6 @@
   import RadioButton from '@/components/Shared/RadioButton.vue'
   import Button from '@/components/Shared/Button.vue'
   import AlipayQqWechatForm from '@/components/Funds/AddFunds/Form/AlipayQqWechat.vue'
-  import AnypayForm from '@/components/Funds/AddFunds/Form/Anypay.vue'
-  import PayeerForm from '@/components/Funds/AddFunds/Form/Payeer.vue'
 
   const route = useRoute()
   const { t } = useI18n()
@@ -65,8 +63,6 @@
   const selectedGateway = ref<Gateway | null>(gatewaysList.value[0].id)
   const selectedAmount = ref(0)
   const customAmount = ref<number | null>(null)
-  const anypayPayment = ref(false)
-  const payeerPayment = ref(false)
   const recaptchaToken = ref('')
 
   const amount = computed(() => selectedAmount.value || customAmount.value)
@@ -117,12 +113,6 @@
         } else {
           await createCryptomusPayment(amountValue.value)
         }
-        break
-      case Gateway.anypay:
-        anypayPayment.value = true
-        break
-      case Gateway.payeer:
-        payeerPayment.value = true
         break
     }
     appStore.fundsLoading = false
@@ -208,7 +198,4 @@
       </Button>
     </template>
   </div>
-
-  <AnypayForm :anypay-payment="anypayPayment" :amount="amountValue" @clear-anypay="anypayPayment = false" />
-  <PayeerForm :payeer-payment="payeerPayment" :amount="amountValue" @clear-payeer="payeerPayment = false" />
 </template>

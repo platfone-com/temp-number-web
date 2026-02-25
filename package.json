@@ -1,6 +1,6 @@
 {
   "name": "temp-number-nodejs-web",
-  "version": "2.6.2",
+  "version": "2.7.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -55,6 +55,7 @@
     "privatix-prettier": "^1.0.1",
     "typescript": "~5.7.3",
     "vite": "^6.4.1",
+    "vite-plugin-csp-guard": "^2.2.0",
     "vite-plugin-vue-devtools": "^7.7.0",
     "vue-tsc": "^2.2.0"
   }

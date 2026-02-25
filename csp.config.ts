@@ -18,6 +18,21 @@ export function cspPlugin(): PluginOption {
     return null
   }
 
+  const scriptSources = [
+    "'self'",
+    'https://js.stripe.com',
+    'https://*.js.stripe.com',
+    'https://maps.googleapis.com',
+    'https://*.google.com',
+    'https://www.gstatic.com',
+    'https://*.recaptcha.net',
+    'https://www.paypal.com',
+    'https://www.paypalobjects.com',
+    'https://client.crisp.chat',
+    'https://oauth.telegram.org',
+    'https://*.cloudflareinsights.com'
+  ]
+
   return csp({
     dev: {
       run: false
@@ -28,32 +43,8 @@ export function cspPlugin(): PluginOption {
     override: true,
     policy: {
       'default-src': ["'self'"],
-      'script-src': [
-        "'self'",
-        'https://js.stripe.com',
-        'https://*.js.stripe.com',
-        'https://maps.googleapis.com',
-        'https://*.google.com',
-        'https://www.gstatic.com',
-        'https://*.recaptcha.net',
-        'https://www.paypal.com',
-        'https://www.paypalobjects.com',
-        'https://client.crisp.chat',
-        'https://oauth.telegram.org'
-      ],
-      'script-src-elem': [
-        "'self'",
-        'https://js.stripe.com',
-        'https://*.js.stripe.com',
-        'https://maps.googleapis.com',
-        'https://*.google.com',
-        'https://www.gstatic.com',
-        'https://*.recaptcha.net',
-        'https://www.paypal.com',
-        'https://www.paypalobjects.com',
-        'https://client.crisp.chat',
-        'https://oauth.telegram.org'
-      ],
+      'script-src': scriptSources,
+      'script-src-elem': scriptSources,
       'style-src': ["'self'", "'unsafe-inline'", 'https://widget.wl.platfone.com', 'https://client.crisp.chat'],
       'style-src-attr': ["'unsafe-inline'"],
       'frame-src': [
@@ -82,6 +73,7 @@ export function cspPlugin(): PluginOption {
         'https://oauth.telegram.org',
         'https://*.crisp.chat',
         'wss://*.crisp.chat',
+        'https://*.cloudflareinsights.com',
         toOrigin(env.VITE_TEMP_NUMBER_BACKEND_API_BASE_PATH),
         toOrigin(env.VITE_WL_API_BASE_PATH)
       ].filter((v): v is string => Boolean(v)),

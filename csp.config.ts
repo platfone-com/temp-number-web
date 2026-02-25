@@ -20,6 +20,7 @@ export function cspPlugin(): PluginOption {
 
   const scriptSources = [
     "'self'",
+    "'unsafe-inline'",
     'https://js.stripe.com',
     'https://*.js.stripe.com',
     'https://maps.googleapis.com',
@@ -43,7 +44,7 @@ export function cspPlugin(): PluginOption {
     override: true,
     policy: {
       'default-src': ["'self'"],
-      'script-src': ["'unsafe-inline'", ...scriptSources],
+      'script-src': scriptSources,
       'script-src-elem': scriptSources,
       'style-src': ["'self'", "'unsafe-inline'", 'https://widget.wl.platfone.com', 'https://client.crisp.chat'],
       'style-src-attr': ["'unsafe-inline'"],

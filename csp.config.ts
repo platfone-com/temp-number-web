@@ -43,7 +43,7 @@ export function cspPlugin(): PluginOption {
     override: true,
     policy: {
       'default-src': ["'self'"],
-      'script-src': scriptSources,
+      'script-src': ["'unsafe-inline'", ...scriptSources],
       'script-src-elem': scriptSources,
       'style-src': ["'self'", "'unsafe-inline'", 'https://widget.wl.platfone.com', 'https://client.crisp.chat'],
       'style-src-attr': ["'unsafe-inline'"],

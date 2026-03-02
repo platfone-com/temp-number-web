@@ -15,8 +15,8 @@ export function useUser() {
   const toast = useToastStore()
   const modalStore = useModalStore()
 
-  const getCustomer = async (): Promise<ICustomer | null> => {
-    const apiPathUrl = '/app-getCustomer'
+  const getCustomer = async (): Promise<ICustomer | IWLCustomer | null> => {
+    const apiPathUrl = config.wlWidgetMode ? `/customer` : '/app-getCustomer'
     const { data } = await get<ICustomer>(apiPathUrl)
     if (data) return data
     return null

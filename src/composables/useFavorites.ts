@@ -4,8 +4,16 @@ import { useUser } from '@/composables/api/useUser'
 import { useAppStore } from '@/stores/app'
 import type { Favorites } from '@/types/order'
 import type { IFullCountryPriceData, IFullServicePriceData } from '@/types/api/catalog'
+import type { ICustomer, IWLCustomer } from '@/types/api/user'
 
 type Favorite = { service_id: string } | { country_id: string }
+
+const getCustomerCountry = (customer?: ICustomer | IWLCustomer | null): string | undefined => {
+  if (!customer) return undefined
+  if ('regCountry' in customer && customer.regCountry) return customer.regCountry
+  if ('country' in customer && customer.country) return customer.country
+  return undefined
+}
 
 export function useFavorites() {
   const FAVORITES_KEY = 'favorites'
@@ -55,8 +63,9 @@ export function useFavorites() {
     if (userCountryFavoriteInitialized) return
 
     const customer = await getCustomer()
-    if (customer?.regCountry) {
-      const customerCountry = customer?.regCountry.toLowerCase()
+    const customerCountryRaw = getCustomerCountry(customer)
+    if (customerCountryRaw) {
+      const customerCountry = String(customerCountryRaw).toLowerCase()
       if (customerCountry === 'xx') return
       loadFavorites()
       if (!isFavorite(favorites.value.countries, { country_id: customerCountry })) {

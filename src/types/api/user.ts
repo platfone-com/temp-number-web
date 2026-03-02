@@ -13,4 +13,6 @@ export interface IWLCustomer {
   email: string | null
   email_verified: boolean
   is_password_provider?: boolean
+  country?: string
+  account_on_hold?: boolean
 }

@@ -66,7 +66,11 @@
     } catch (e: unknown) {
       if (e && typeof e === 'object' && 'code' in e) {
         const error = e as FirebaseError
-        if (['auth/user-not-found', 'auth/invalid-credential'].includes(error.code)) {
+        if (
+          ['auth/user-not-found', 'auth/invalid-credential', 'auth/invalid-email', 'auth/invalid-password'].includes(
+            error.code
+          )
+        ) {
           toast.add({
             id: 'no_match_email_psw_validation',
             text: t('notifications_email_address_and_password_don_t_match')

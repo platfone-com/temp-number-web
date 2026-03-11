@@ -56,7 +56,7 @@
       resetField('password')
       if (e && typeof e === 'object' && 'code' in e) {
         const error = e as FirebaseError
-        if (error.code === 'auth/invalid-credential') {
+        if (['auth/invalid-credential', 'auth/invalid-password'].includes(error.code)) {
           toast.add({
             id: 'invalid-login-credentials',
             text: t('notifications_password_is_wrong')

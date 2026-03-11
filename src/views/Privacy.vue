@@ -83,43 +83,42 @@
     </p>
     <p>
       Cookies &ndash; We use cookies to improve your experience with us when visiting our website, by remembering
-      options such as a login session token and your preferred language.&nbsp; These cookies contain no personally
+      options such as a login session token and your preferred language. These cookies contain no personally
       identifiable information.
     </p>
     <p>
-      Like most websites, we also use Google Analytics to track user interaction.&nbsp; We use this data to determine
-      the number of people using our website, to better understand how they find and use our web pages, and to see their
-      journey through our website.&nbsp; Google Analytics records data such as your geographical location, device,
-      internet browser and operating system, and your internet connection IP address. This information is only processed
-      in a way which does not identify anyone. We do not make, and do not allow Google to make, any attempt to find out
-      the identities of those visiting our website.
+      Like most websites, we also use Google Analytics to track user interaction. We use this data to determine the
+      number of people using our website, to better understand how they find and use our web pages, and to see their
+      journey through our website. Google Analytics records data such as your geographical location, device, internet
+      browser and operating system, and your internet connection IP address. This information is only processed in a way
+      which does not identify anyone. We do not make, and do not allow Google to make, any attempt to find out the
+      identities of those visiting our website.
     </p>
     <p>
-      Your web browser allows you to delete cookies and disable them in the future.&nbsp; Should you delete or disable
+      Your web browser allows you to delete cookies and disable them in the future. Should you delete or disable
       cookies, you may find that some of our services are unavailable to you.
     </p>
     <p>
-      reCAPTCHA &ndash; We use Google reCAPTCHA Enterprise to protect our service from spam, fraud, and abuse by automated
-      bots.&nbsp; When you interact with our service, reCAPTCHA may collect information including your IP address, browser
-      type and version, device information, screen resolution, operating system, user interactions (such as mouse movements,
-      keyboard patterns, and touch events), and other technical information necessary to assess whether you are a human user
-      or an automated bot.&nbsp; This data is processed by Temp-Number (operated by Privatix LTD) as the data controller,
-      with Google acting as a data processor under our instructions in accordance with the Google Cloud Data Processing
-      Addendum.&nbsp; We use this service for our legitimate interest in maintaining the security and integrity of our
-      platform, preventing fraudulent activities, and ensuring that our service is used in accordance with our Terms and
-      Conditions.&nbsp; The data collected by reCAPTCHA is used solely for security and fraud prevention purposes and is not
-      used by Google for any other purpose.&nbsp; For more information about how we protect your data, please see the Data
-      Security section below.
+      reCAPTCHA &ndash; We use Google reCAPTCHA Enterprise to protect our service from spam, fraud, and abuse by
+      automated bots. When you interact with our service, reCAPTCHA may collect information including your IP address,
+      browser type and version, device information, screen resolution, operating system, user interactions (such as
+      mouse movements, keyboard patterns, and touch events), and other technical information necessary to assess whether
+      you are a human user or an automated bot. This data is processed by Temp-Number (operated by Privatix LTD) as the
+      data controller, with Google acting as a data processor under our instructions in accordance with the Google Cloud
+      Data Processing Addendum. We use this service for our legitimate interest in maintaining the security and
+      integrity of our platform, preventing fraudulent activities, and ensuring that our service is used in accordance
+      with our Terms and Conditions. The data collected by reCAPTCHA is used solely for security and fraud prevention
+      purposes and is not used by Google for any other purpose. For more information about how we protect your data,
+      please see the Data Security section below.
     </p>
     <p>&nbsp;</p>
     <h2>Third-Party Information</h2>
     <p>
       Third-Party Service Providers &ndash; We partner with European and US third-party service providers to help us
-      deliver, understand, support, and market our service.&nbsp; For example, we work with companies to terminate and
-      receive calls and SMS, provide virtual phone numbers, process payments, distribute our apps, provide our
-      infrastructure, help us understand how our service is used, and communicate with you.&nbsp; We provide these
-      third-party services only with the information absolutely necessary to deliver the part of the service they
-      provide for us.
+      deliver, understand, support, and market our service. For example, we work with companies to terminate and receive
+      calls and SMS, provide virtual phone numbers, process payments, distribute our apps, provide our infrastructure,
+      help us understand how our service is used, and communicate with you. We provide these third-party services only
+      with the information absolutely necessary to deliver the part of the service they provide for us.
     </p>
     <p>
       Third-Parties &ndash; All personal information collected by us is kept in the strictest confidence. We will not

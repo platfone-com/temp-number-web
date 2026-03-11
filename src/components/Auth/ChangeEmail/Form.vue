@@ -69,7 +69,7 @@
         }
       }
       await verifyBeforeUpdateEmail(auth.currentUser, values.email, actionCodeSettings)
-      const notificationText = `${t('notifications_email_successfully_changed')}! ${t('notifications_please_click_on_the_verification_link_we_have_sent_to_your_email_b_0_b').replace('<b>__0__</b>', values.email)}`
+      const notificationText = `${t('notifications_email_successfully_changed')}! ${t('notifications_please_click_on_the_verification_link_we_have_sent_to_your_email_b_0_b').replace('__0__', values.email)}`
       if (isWlHelperUrl()) {
         handleWlActionRedirect('changeEmail', 'success', notificationText)
       } else {

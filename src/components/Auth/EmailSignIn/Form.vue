@@ -67,7 +67,7 @@
       if (e && typeof e === 'object' && 'code' in e) {
         const error = e as FirebaseError
         if (
-          ['auth/user-not-found', 'auth/invalid-credential', 'auth/invalid-email', 'auth/invalid-password'].includes(
+          ['auth/user-not-found', 'auth/invalid-credential', 'auth/invalid-email', 'auth/wrong-password'].includes(
             error.code
           )
         ) {

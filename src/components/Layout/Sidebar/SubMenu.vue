@@ -78,7 +78,7 @@
           :to="{ name: 'API' }"
           class="tn:hover:text-primary-900 tn:block tn:py-1 tn:text-[0.9375rem]"
         >
-          Temp Number
+          White-Label
           <span class="tn:inline-block tn:px-1.5 tn:bg-primary-900 tn:rounded-lg tn:text-white tn:font-medium"
             >API</span
           >

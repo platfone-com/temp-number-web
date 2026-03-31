@@ -99,6 +99,7 @@
     })
 
     if ((error.type === 'card_error' || error.type === 'validation_error') && error.message) {
+      close()
       toast.add({
         id: 'payment_error_by_type',
         text: error.message,

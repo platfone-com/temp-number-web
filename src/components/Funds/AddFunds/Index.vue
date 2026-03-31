@@ -102,6 +102,8 @@
             publicKey: result.publicKey,
             clientSecret: result.clientSecret
           }
+        } else {
+          await handlePaymentError()
         }
         break
       case Gateway.paypal:

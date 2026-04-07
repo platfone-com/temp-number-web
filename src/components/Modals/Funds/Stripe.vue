@@ -85,7 +85,7 @@
   )
 
   const handlePayment = async () => {
-    if (!stripeInst.value) return
+    if (!stripeInst.value || loading.value) return
     loading.value = true
     let returnUrl = `${import.meta.env.VITE_TEMP_NUMBER_FRONTEND_BASE_APP_URL ?? ''}/funds?`
     if (route.name === 'MobilePayment') {
@@ -98,8 +98,9 @@
       }
     })
 
+    close()
+
     if ((error.type === 'card_error' || error.type === 'validation_error') && error.message) {
-      close()
       toast.add({
         id: 'payment_error_by_type',
         text: error.message,
@@ -108,7 +109,6 @@
     } else {
       await handlePaymentError()
     }
-    loading.value = false
   }
 
   const checkPaymentStatus = async () => {

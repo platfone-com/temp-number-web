@@ -109,15 +109,81 @@
   }
 
   const searchServices = () => {
-    servicesItems.value = services.value.filter((service: IFullServicePriceData) =>
-      service.alt_name?.toLowerCase().includes(serviceSearchStr.value.trim().toLowerCase())
-    )
+    const query = serviceSearchStr.value.trimStart().replace(/\s+$/, ' ').toLowerCase()
+    if (!query) return
+
+    const exactNameMatches: IFullServicePriceData[] = []
+    const nameStartMatches: IFullServicePriceData[] = []
+    const exactAltMatches: IFullServicePriceData[] = []
+    const altNameStartMatches: IFullServicePriceData[] = []
+    const altNamePartialMatches: IFullServicePriceData[] = []
+
+    for (const service of services.value as IFullServicePriceData[]) {
+      const nameLower = service.name?.toLowerCase() || ''
+      const altSegments = service.alt_name?.split('|').map((s) => s.trim().toLowerCase()) || []
+
+      // 1. Exact name match — name exactly equals query
+      if (nameLower === query) {
+        exactNameMatches.push(service)
+        continue
+      }
+
+      // 2. Name starts with — name starts with query
+      if (nameLower.startsWith(query)) {
+        nameStartMatches.push(service)
+        continue
+      }
+
+      // 3. Exact alt_name match — any segment exactly equals query
+      const isExactAlt = altSegments.some((segment) => segment === query)
+      if (isExactAlt) {
+        exactAltMatches.push(service)
+        continue
+      }
+
+      // 4. Alt names where any segment starts with query
+      const startsMatch = altSegments.some((segment) => segment.startsWith(query))
+      if (startsMatch) {
+        altNameStartMatches.push(service)
+        continue
+      }
+
+      // 5. Alt names where any segment contains query as a substring
+      const partialMatch = altSegments.some((segment) => segment.includes(query))
+      if (partialMatch) {
+        altNamePartialMatches.push(service)
+      }
+    }
+
+    const hasExactMatches = exactNameMatches.length > 0
+
+    const otherService = services.value.find((service: IFullServicePriceData) => service.service_id === 'other') as
+      | IFullServicePriceData
+      | undefined
+
+    const hasOtherInBuckets =
+      otherService &&
+      [exactNameMatches, nameStartMatches, exactAltMatches, altNameStartMatches, altNamePartialMatches].some((bucket) =>
+        bucket.some((s) => s.service_id === 'other')
+      )
+
+    const showOther = otherService && !hasOtherInBuckets && !hasExactMatches
+
+    servicesItems.value = [
+      ...exactNameMatches,
+      ...nameStartMatches,
+      ...exactAltMatches,
+      ...altNameStartMatches,
+      ...(showOther ? [otherService] : []),
+      ...altNamePartialMatches
+    ]
+
     if (servicesItems.value.length > 0) {
       if ('price' in servicesItems.value[0] && sortDirection.value) {
         servicesItems.value = sortCatalogByPrice(servicesItems.value as IFullServicePriceData[], sortDirection.value)
       }
-    } else {
-      servicesItems.value = services.value.filter((service: IFullServicePriceData) => service.service_id === 'other')
+    } else if (otherService) {
+      servicesItems.value = [otherService]
     }
   }
 

@@ -86,9 +86,78 @@
   }
 
   const searchCountries = () => {
-    countriesItems.value = countries.value.filter((country: IFullCountryPriceData) =>
-      country.alt_name?.toLowerCase().includes(countrySearchStr.value.trim().toLowerCase())
-    )
+    const query = countrySearchStr.value.trimStart().replace(/\s+$/, ' ').toLowerCase()
+    if (!query) return
+
+    const exactNameMatches: IFullCountryPriceData[] = []
+    const exactCodeMatches: IFullCountryPriceData[] = []
+    const nameStartMatches: IFullCountryPriceData[] = []
+    const codeStartMatches: IFullCountryPriceData[] = []
+    const exactAltMatches: IFullCountryPriceData[] = []
+    const altNameStartMatches: IFullCountryPriceData[] = []
+    const altNamePartialMatches: IFullCountryPriceData[] = []
+
+    const queryCode = query.startsWith('+') ? query.slice(1) : query
+
+    for (const country of countries.value as IFullCountryPriceData[]) {
+      const nameLower = country.name?.toLowerCase() || ''
+      const altSegments = country.alt_name?.split('|').map((s) => s.trim().toLowerCase()) || []
+
+      // 1. Exact name match — name exactly equals query
+      if (nameLower === query) {
+        exactNameMatches.push(country)
+        continue
+      }
+
+      // 2. Exact code match — any code exactly equals query (strip leading +)
+      if (queryCode && country.codes?.some((code) => code === queryCode)) {
+        exactCodeMatches.push(country)
+        continue
+      }
+
+      // 3. Name starts with — name starts with query
+      if (nameLower.startsWith(query)) {
+        nameStartMatches.push(country)
+        continue
+      }
+
+      // 4. Code starts with — any code starts with query (strip leading +)
+      if (queryCode && country.codes?.some((code) => code.startsWith(queryCode))) {
+        codeStartMatches.push(country)
+        continue
+      }
+
+      // 5. Exact alt_name match — any segment exactly equals query
+      const isExactAlt = altSegments.some((segment) => segment === query)
+      if (isExactAlt) {
+        exactAltMatches.push(country)
+        continue
+      }
+
+      // 6. Alt names where any segment starts with query
+      const startsMatch = altSegments.some((segment) => segment.startsWith(query))
+      if (startsMatch) {
+        altNameStartMatches.push(country)
+        continue
+      }
+
+      // 7. Alt names where any segment contains query as a substring
+      const partialMatch = altSegments.some((segment) => segment.includes(query))
+      if (partialMatch) {
+        altNamePartialMatches.push(country)
+      }
+    }
+
+    countriesItems.value = [
+      ...exactNameMatches,
+      ...exactCodeMatches,
+      ...nameStartMatches,
+      ...codeStartMatches,
+      ...exactAltMatches,
+      ...altNameStartMatches,
+      ...altNamePartialMatches
+    ]
+
     if (countriesItems.value.length > 0 && 'price' in countriesItems.value[0] && sortDirection.value) {
       countriesItems.value = sortCatalogByPrice(countriesItems.value as IFullCountryPriceData[], sortDirection.value)
     }

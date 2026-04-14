@@ -8,11 +8,18 @@ export function useWlApiPayments() {
   const createWlCryptomusPayment = async (amount: number) => {}
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const createWLAlipayQqWechatPayment = async (coupon: string, recaptchaToken: string) => null
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const createWLPayssionPayment = async (amount: number, pmId: string) => false
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const getWLPayssionPaymentStatus = async (transactionId: string) => undefined
+
   return {
     enabledWLGateways,
     createWLStripePaymentIntent,
     getWLStripePaymentIntentStatus,
     createWlCryptomusPayment,
-    createWLAlipayQqWechatPayment
+    createWLAlipayQqWechatPayment,
+    createWLPayssionPayment,
+    getWLPayssionPaymentStatus
   }
 }

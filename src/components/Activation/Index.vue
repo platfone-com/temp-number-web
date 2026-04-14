@@ -29,7 +29,7 @@
 </script>
 
 <template>
-  <div class="tn:flex tn:flex-col tn:gap-3 tn:rounded-2xl tn:border tn:border-slate-200 tn:p-2">
+  <div :data-testid="`activation-card-${activation.activation_id}`" class="tn:flex tn:flex-col tn:gap-3 tn:rounded-2xl tn:border tn:border-slate-200 tn:p-2">
     <Header :activation="activation" @updateActiveNumber="$emit('updateActiveNumber')" />
     <Service :service-id="activation.service_id" />
     <Status :activation="activation" />

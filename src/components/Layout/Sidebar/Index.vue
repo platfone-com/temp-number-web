@@ -41,7 +41,7 @@
 
 <template>
   <div>
-    <button @click="openDrawer" class="tn:flex tn:cursor-pointer tn:items-center tn:py-2.5">
+    <button data-testid="layout-sidebar-toggle" @click="openDrawer" class="tn:flex tn:cursor-pointer tn:items-center tn:py-2.5">
       <SidebarIcon class="tn:text-tn-black-950 tn:h-4 tn:w-6 tn:sm:h-5 tn:sm:w-7.5 tn:rtl:rotate-180" />
     </button>
 
@@ -55,6 +55,7 @@
       </Transition>
 
       <div
+        data-testid="layout-sidebar-drawer"
         :class="[
           'tn:fixed tn:top-0 tn:bottom-0 tn:z-[420000] tn:flex tn:h-full tn:w-81 tn:transform tn:flex-col tn:justify-between tn:sm:w-100 tn:ltr:right-0 tn:rtl:left-0',
           'tn:bg-tn-bg tn:shadow-lg tn:transition-transform tn:duration-300 tn:ease-in-out tn:overflow-y-auto',

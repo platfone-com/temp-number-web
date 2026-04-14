@@ -20,6 +20,7 @@
   <div class="tn:border-tn-black-100 tn:border-t tn:pt-6 tn:text-lg">
     <button
       v-if="isAuthenticated"
+      data-testid="layout-sidebar-account"
       @click.prevent="emit('showAccountMode')"
       class="tn:hover:text-primary-900 tn:flex tn:w-full tn:items-center tn:gap-2.5"
     >
@@ -28,6 +29,7 @@
     </button>
     <component
       v-else
+      data-testid="layout-sidebar-login-signup"
       :is="unauthedComponent"
       :href="unauthedComponent === 'a' ? wlHelperAuthUrl : undefined"
       :to="unauthedComponent === 'router-link' ? { name: 'CreateAccount' } : undefined"

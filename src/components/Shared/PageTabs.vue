@@ -26,6 +26,7 @@
       :is="tab.link ? 'a' : 'router-link'"
       v-for="tab in tabs"
       :key="tab.id"
+      :data-testid="`page-tab-${tab.id}`"
       :href="tab.link ? tab.link : undefined"
       :to="!tab.link ? { name: tab.id } : undefined"
       class="tn:tracking-tightest tn:flex tn:w-1/2 tn:items-center tn:justify-center tn:px-3 tn:py-2 tn:text-center tn:text-xs tn:leading-[120%] tn:font-medium tn:transition-all tn:duration-200"

@@ -122,6 +122,7 @@
         ]"
       />
       <input
+        :data-testid="`order-${props.searchType}-search-input`"
         v-model="searchQuery"
         ref="inputRef"
         type="text"
@@ -138,6 +139,7 @@
       />
       <button
         v-if="searchQuery"
+        :data-testid="`order-${props.searchType}-search-clear`"
         type="button"
         class="tn:absolute tn:top-1/2 tn:h-5.5 tn:w-5.5 tn:-translate-y-1/2 tn:transform tn:ltr:right-4 tn:rtl:left-4"
         @click.prevent.stop="clear"
@@ -146,6 +148,7 @@
       </button>
       <button
         v-if="isMobile && isSearchFocused && !searchQuery"
+        :data-testid="`order-${props.searchType}-search-cancel`"
         type="button"
         class="tn:text-tn-black-300 tn:absolute tn:top-1/2 tn:h-5.5 tn:w-5.5 tn:-translate-y-1/2 tn:transform tn:text-xs tn:ltr:right-10 tn:rtl:left-10"
         @click.prevent.stop="cancel"

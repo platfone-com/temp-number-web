@@ -44,7 +44,7 @@
 
 <template>
   <Modal v-model="numberReadyStatus" :close-btn="true">
-    <div :class="adaptiveModalWrapperClasses()">
+    <div data-testid="activation-number-ready-modal" :class="adaptiveModalWrapperClasses()">
       <CheckCircleIcon class="tn:h-18 tn:w-18" />
       <div>
         <div :class="adaptiveModalHeaderClasses()">
@@ -60,7 +60,7 @@
         <NumberWithoutCode :activation="activation" />
       </div>
 
-      <Button @click="close" fill block>{{ $t('web_ok_button') }}</Button>
+      <Button data-testid="activation-number-ready-ok" @click="close" fill block>{{ $t('web_ok_button') }}</Button>
 
       <Checkbox v-model="isChecked" :label="$t('web_don_t_show_again_checkbox')" id="number_ready_modal_show" />
     </div>

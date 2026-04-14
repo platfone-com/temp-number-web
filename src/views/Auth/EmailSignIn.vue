@@ -22,7 +22,7 @@
 
   <SignInForm />
 
-  <FooterText>
+  <FooterText data-testid="auth-signin-footer">
     <TranslationText :segments="footerTextSegments" />
   </FooterText>
 </template>

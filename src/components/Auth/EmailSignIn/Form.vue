@@ -102,9 +102,9 @@
 </script>
 
 <template>
-  <form @submit.prevent="signIn" class="tn:mt-10 tn:flex tn:flex-col tn:gap-4">
-    <Input v-model="email" :placeholder="$t('web_email_address')" :error-message="emailError" type="email" />
-    <Input v-model="password" :placeholder="$t('web_password')" :error-message="passwordError" type="password" />
+  <form data-testid="auth-signin-form" @submit.prevent="signIn" class="tn:mt-10 tn:flex tn:flex-col tn:gap-4">
+    <Input data-testid="auth-signin-email" v-model="email" :placeholder="$t('web_email_address')" :error-message="emailError" type="email" />
+    <Input data-testid="auth-signin-password" v-model="password" :placeholder="$t('web_password')" :error-message="passwordError" type="password" />
     <div class="tn:my-1 tn:flex tn:justify-end">
       <router-link
         :to="forgotPasswordHref"
@@ -113,6 +113,6 @@
         {{ $t('web_forgot_password') }}
       </router-link>
     </div>
-    <Button type="submit" fill :loading="authLoading">{{ $t('web_login') }}</Button>
+    <Button data-testid="auth-signin-submit" type="submit" fill :loading="authLoading">{{ $t('web_login') }}</Button>
   </form>
 </template>

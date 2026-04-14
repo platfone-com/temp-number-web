@@ -84,6 +84,8 @@
 
 <template>
   <div
+    :data-testid="`order-item-${imageType}-${itemId}`"
+    :data-item-name="isAnyOtherService ? 'any_other' : item.name"
     :class="[
       'tn:hover:bg-tn-black-50 tn:flex tn:h-12 tn:w-full tn:cursor-pointer tn:items-center tn:justify-between tn:gap-2 tn:overflow-hidden',
       showScrollbar ? 'tn:lg:ltr:pr-4 tn:lg:ltr:pl-6 tn:lg:rtl:pr-6 tn:lg:rtl:pl-4' : 'tn:lg:px-6',

@@ -13,6 +13,7 @@
 
 <template>
   <div
+    data-testid="activation-waiting-status"
     class="tn:border-primary-900 tn:flex tn:h-14 tn:items-center tn:justify-center tn:gap-2 tn:rounded-xl tn:border tn:px-8 tn:py-2.5"
   >
     <ButtonSpinner color="tn:border-primary-900" size="tn:h-4.5 tn:w-4.5" weight="tn:border-2" />

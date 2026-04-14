@@ -27,7 +27,7 @@
 
   <SignUpForm />
 
-  <FooterText>
+  <FooterText data-testid="auth-signup-footer">
     <TranslationText :segments="footerTextSegments" />
   </FooterText>
 </template>

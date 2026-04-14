@@ -84,7 +84,7 @@
       </div>
     </div>
 
-    <div v-if="errorMessage" class="tn:px-3 tn:pt-4 tn:text-xs tn:text-red-500">
+    <div v-if="errorMessage" data-testid="input-error" class="tn:px-3 tn:pt-4 tn:text-xs tn:text-red-500">
       {{ errorMessage }}
     </div>
   </div>

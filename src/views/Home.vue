@@ -57,7 +57,7 @@
 </script>
 
 <template>
-  <div :class="['tn:flex tn:lg:gap-3 tn:lg:pb-0', orderPrice || !oneBlockOrder ? 'tn:pb-22' : 'tn:pb-0']">
+  <div data-testid="home-catalog-page" :class="['tn:flex tn:lg:gap-3 tn:lg:pb-0', orderPrice || !oneBlockOrder ? 'tn:pb-22' : 'tn:pb-0']">
     <Service v-if="catalogBlock === CatalogBlock.SERVICE" />
     <Country v-else />
     <Country v-if="catalogBlock === CatalogBlock.SERVICE" />

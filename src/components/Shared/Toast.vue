@@ -12,6 +12,7 @@
 
 <template>
   <div
+    data-testid="toast-container"
     :class="[
       'tn:fixed tn:top-18 tn:z-[1000000] tn:flex tn:w-[calc(100%-3rem)] tn:flex-col tn:gap-4 tn:transition-all tn:sm:top-38 tn:sm:w-72 tn:sm:gap-5',
       ltrStyles,
@@ -22,6 +23,7 @@
       <div
         v-for="toast in toasts"
         :key="toast.id"
+        :data-testid="`toast-${toast.id}`"
         :class="[
           'tn:relative tn:flex tn:w-full tn:items-center tn:rounded-lg tn:py-3 tn:text-white tn:shadow-lg tn:ltr:pr-10 tn:ltr:pl-4 tn:rtl:pr-4 tn:rtl:pl-10',
           toast.type === 'success' ? 'tn:bg-green-500' : '',
@@ -31,6 +33,7 @@
       >
         {{ toast.text }}
         <button
+          :data-testid="`toast-close-${toast.id}`"
           class="tn:absolute tn:top-2.5 tn:h-6 tn:w-6 tn:cursor-pointer tn:text-xl tn:ltr:right-2 tn:rtl:left-2"
           @click="toastStore.remove(toast.id)"
         >

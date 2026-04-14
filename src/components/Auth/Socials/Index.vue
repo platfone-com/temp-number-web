@@ -115,7 +115,7 @@
 </script>
 
 <template>
-  <div class="tn:mt-8 tn:mb-4 tn:flex tn:flex-col">
+  <div data-testid="auth-social-options" class="tn:mt-8 tn:mb-4 tn:flex tn:flex-col">
     <div class="tn:flex tn:w-full tn:flex-col tn:items-center tn:gap-3">
       <Button v-for="item of socialAuthProviders" :key="item.id" @click="login(item.provider)">
         <component :is="getSocialIcon(item.provider)" class="tn:h-6 tn:w-6" />

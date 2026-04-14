@@ -48,7 +48,7 @@
 
 <template>
   <div class="tn:bg-tn-black-50 tn:flex tn:items-center tn:justify-between tn:gap-4 tn:rounded-xl tn:p-2">
-    <div @click="handleCopy" class="tn:gap tn:flex tn:cursor-pointer tn:items-center tn:gap-3">
+    <div data-testid="activation-copy-number-trigger" @click="handleCopy" class="tn:gap tn:flex tn:cursor-pointer tn:items-center tn:gap-3">
       <div class="tn:flex tn:items-center tn:gap-1.5">
         <ImageWithFallback
           image-type="countries"

@@ -20,6 +20,7 @@
 
 <template>
   <NumberBlock
+    data-testid="activation-number-with-code"
     v-if="activation"
     @click.prevent="copyToClipboard(activation?.phone, phoneRef ?? undefined, 1500)"
     class="tn:cursor-pointer"

@@ -42,7 +42,7 @@
 
 <template>
   <Modal v-model="copyNumberModalStatus" :close-btn="true">
-    <div :class="adaptiveModalWrapperClasses()">
+    <div data-testid="activation-copy-number-modal" :class="adaptiveModalWrapperClasses()">
       <div>
         <div :class="adaptiveModalHeaderClasses()">
           {{ $t('web_title_copy_number') }}

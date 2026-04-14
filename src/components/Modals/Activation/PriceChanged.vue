@@ -35,17 +35,17 @@
 
 <template>
   <Modal v-model="activationPriceChangedModal" :close-btn="true">
-    <div :class="adaptiveModalWrapperClasses()">
+    <div data-testid="activation-price-changed-modal" :class="adaptiveModalWrapperClasses()">
       <div>
         <div :class="adaptiveModalHeaderClasses()">{{ $t('notifications_price_change') }}</div>
         <div v-html="modalText" :class="adaptiveModalSubheaderClasses()" />
       </div>
 
       <div class="tn:flex tn:w-full tn:flex-col tn:gap-2 tn:lg:flex-row">
-        <Button @click="createActivationWithNewPrice" fill block :loading="orderLoading">
+        <Button data-testid="activation-price-changed-yes" @click="createActivationWithNewPrice" fill block :loading="orderLoading">
           {{ $t('notifications_yes') }}
         </Button>
-        <Button @click="activationPriceChangedModal = false" fill block color="secondary">
+        <Button data-testid="activation-price-changed-no" @click="activationPriceChangedModal = false" fill block color="secondary">
           {{ $t('notifications_no') }}
         </Button>
       </div>

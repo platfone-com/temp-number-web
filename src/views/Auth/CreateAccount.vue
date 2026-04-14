@@ -25,7 +25,7 @@
 
   <Socials />
 
-  <Button fill to="SignUp">
+  <Button data-testid="auth-continue-with-email" fill to="SignUp">
     {{ $t('web_continue_with_email') }}
   </Button>
 

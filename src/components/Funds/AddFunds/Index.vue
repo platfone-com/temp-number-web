@@ -176,6 +176,7 @@
           :is-active="selectedAmount === amountItem"
         />
         <input
+          data-testid="funds-custom-amount-input"
           v-model="customAmount"
           @focus="selectedAmount = 0"
           @keydown="blockDecimalInput"
@@ -195,7 +196,7 @@
         class="tn:text-center tn:text-sm tn:leading-5.5 tn:opacity-60"
       />
 
-      <Button @click="buyCredits" fill :loading="loading" :disabled="isPayButtonDisabled">
+      <Button data-testid="funds-buy-credits-button" @click="buyCredits" fill :loading="loading" :disabled="isPayButtonDisabled">
         {{ $t('web_add_funds_cta_button_buy_credits') }}
       </Button>
     </template>

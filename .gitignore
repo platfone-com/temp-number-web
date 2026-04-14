@@ -35,3 +35,14 @@ auto-imports.d.ts
 components.d.ts
 
 .env
+.env.site*
+!.env.site.example
+.env.wl*
+!.env.wl.example
+
+
+playwright-report
+.playwright-mcp
+test-results
+tests/**/*.js
+playwright.config.js

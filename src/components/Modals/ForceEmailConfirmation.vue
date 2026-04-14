@@ -50,7 +50,7 @@
 
 <template>
   <Modal v-model="forceEmailConfirmationModal" :persistent="true" :z-index="510000">
-    <div :class="adaptiveModalWrapperClasses()">
+    <div data-testid="auth-verify-email-modal" :class="adaptiveModalWrapperClasses()">
       <div>
         <div :class="adaptiveModalHeaderClasses()">{{ $t('notifications_verify_your_email') }}</div>
         <div :class="adaptiveModalSubheaderClasses()">

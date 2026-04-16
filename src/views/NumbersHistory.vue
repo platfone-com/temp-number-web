@@ -5,7 +5,7 @@
 </script>
 
 <template>
-  <div>
+  <div data-testid="numbers-history-page">
     <PageHeader>{{ $t('web_numbers_page_title') }}</PageHeader>
     <NumbersTabs />
     <History />

@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 config({ path: resolve(__dirname, 'tests/.env') })
 const reporters: [string, Record<string, unknown>][] = [
-  ['html', { open: process.env.PW_NO_REPORT ? 'never' : 'on-failure' }],
+  ['html', { open: process.env.PW_NO_REPORT ? 'never' : 'on-failure' }]
 ]
 
 if (process.env.PW_JUINT_ENABLED === '1') {
@@ -27,13 +27,13 @@ export default defineConfig({
     baseURL: process.env.PLAYWRIGHT_BASE_URL,
     locale: process.env.PLAYWRIGHT_LOCALE ?? 'en',
     trace: 'on-first-retry',
-    screenshot: 'only-on-failure',
+    screenshot: 'only-on-failure'
   },
 
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    },
-  ],
+      use: { ...devices['Desktop Chrome'] }
+    }
+  ]
 })

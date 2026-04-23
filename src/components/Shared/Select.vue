@@ -12,6 +12,10 @@
     selected: {
       type: [String, Number, null] as PropType<string | number | null>,
       default: null
+    },
+    placeholder: {
+      type: String,
+      default: ''
     }
   })
 
@@ -34,7 +38,7 @@
         'tn:rounded-xl'
       ]"
     >
-      <span>{{ selectedItemText }}</span>
+      <span :class="{ 'tn:opacity-50': !selectedItemText }">{{ selectedItemText || placeholder }}</span>
       <ArrowDownIcon
         :class="[
           'tn:text-tn-black-900 tn:h-6 tn:w-6 tn:min-w-6',

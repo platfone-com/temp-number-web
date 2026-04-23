@@ -15,6 +15,7 @@ interface ImportMetaEnv {
   readonly VITE_ALIPAY_QQ_WECHAT_STORE_URL?: string
   readonly VITE_CRISP_WEBSITE_ID?: string
   readonly VITE_CSP_ENABLED?: '1' | '0'
+  readonly VITE_ACTIVE_OTHER_PAY_GATEWAYS?: string
 }
 
 interface ImportMeta {

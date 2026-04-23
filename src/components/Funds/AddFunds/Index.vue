@@ -12,17 +12,30 @@
   import { useModalStore } from '@/stores/modal'
   import { useAppStore } from '@/stores/app'
   import { useFundsHelper } from '@/composables/useFundsHelper'
-  import { Gateway } from '@/types/api/funds'
+  import { Gateway, PayssionPaymentStatus } from '@/types/api/funds'
   import Select from '@/components/Shared/Select.vue'
   import RadioButton from '@/components/Shared/RadioButton.vue'
   import Button from '@/components/Shared/Button.vue'
   import AlipayQqWechatForm from '@/components/Funds/AddFunds/Form/AlipayQqWechat.vue'
+  import OtherGatewayForm from '@/components/Funds/AddFunds/Form/OtherGateway.vue'
 
   const route = useRoute()
   const { t } = useI18n()
-  const { enabledGateways, enabledMobilePaymentGateways, createStripePaymentIntent, createCryptomusPayment } =
-    useFunds()
-  const { enabledWLGateways, createWLStripePaymentIntent, createWlCryptomusPayment } = useWlApiPayments()
+  const {
+    enabledGateways,
+    enabledMobilePaymentGateways,
+    createStripePaymentIntent,
+    createCryptomusPayment,
+    createPayssionPayment,
+    getPayssionPaymentStatus
+  } = useFunds()
+  const {
+    enabledWLGateways,
+    createWLStripePaymentIntent,
+    createWlCryptomusPayment,
+    createWLPayssionPayment,
+    getWLPayssionPaymentStatus
+  } = useWlApiPayments()
   const { isWlHelperUrl } = useWlHelper()
   const { loadRecaptchaEnterprise, getRecaptchaToken } = useRecaptcha()
   const {
@@ -56,7 +69,12 @@
       const { returnUrl, fbToken } = route.query
       if (!returnUrl || !fbToken) return true
     }
-    return loading.value || !selectedGateway.value || !amount.value
+    return (
+      loading.value ||
+      !selectedGateway.value ||
+      !amount.value ||
+      (selectedGateway.value === Gateway.other && !otherPmId.value)
+    )
   })
 
   const amountValue = ref(0)
@@ -64,11 +82,22 @@
   const selectedAmount = ref(0)
   const customAmount = ref<number | null>(null)
   const recaptchaToken = ref('')
+  const otherProvider = ref('')
+  const otherPmId = ref('')
 
   const amount = computed(() => selectedAmount.value || customAmount.value)
 
   const selectItem = (itemId: Gateway) => {
     selectedGateway.value = itemId
+    if (itemId !== Gateway.other) {
+      otherProvider.value = ''
+      otherPmId.value = ''
+    }
+  }
+
+  const selectOtherGateway = (data: { provider: string; pm_id: string }) => {
+    otherProvider.value = data.provider
+    otherPmId.value = data.pm_id
   }
 
   const buyCredits = async () => {
@@ -116,15 +145,50 @@
           await createCryptomusPayment(amountValue.value)
         }
         break
+      case Gateway.other:
+        if (otherProvider.value === 'payssion' && otherPmId.value) {
+          const payssionResult = isWlHelperUrl()
+            ? await createWLPayssionPayment(amountValue.value, otherPmId.value)
+            : await createPayssionPayment(amountValue.value, otherPmId.value)
+          if (!payssionResult) {
+            await handlePaymentError()
+          }
+        }
+        break
     }
     appStore.fundsLoading = false
   }
 
-  const handlePaymentStatus = () => {
-    const { status, type, pi_public_key } = route.query
+  const handlePaymentStatus = async () => {
+    const { status, type, pi_public_key, transaction_id } = route.query
     const mobilePaymentReturnUrl = localStorage.getItem('mobilePaymentReturnUrl')
 
+    if (transaction_id) {
+      const payssionStatus = isWlHelperUrl()
+        ? await getWLPayssionPaymentStatus(transaction_id as string)
+        : await getPayssionPaymentStatus(transaction_id as string)
+
+      if (payssionStatus === PayssionPaymentStatus.paid) {
+        if (mobilePaymentReturnUrl) {
+          removeMobilePaymentData()
+          location.href = getMobilePaymentFullReturnUrl(mobilePaymentReturnUrl, 'success')
+        } else handleSuccessPayment()
+      } else if (payssionStatus === PayssionPaymentStatus.review) {
+        if (mobilePaymentReturnUrl) {
+          removeMobilePaymentData()
+          location.href = getMobilePaymentFullReturnUrl(mobilePaymentReturnUrl, 'review')
+        } else modalStore.paymentInReviewModal = true
+      } else {
+        if (mobilePaymentReturnUrl) {
+          removeMobilePaymentData()
+          location.href = getMobilePaymentFullReturnUrl(mobilePaymentReturnUrl, 'error')
+        } else handlePaymentError()
+      }
+      return
+    }
+
     if (!pi_public_key) removeMobilePaymentData()
+
     if (!status) return
 
     if (status === 'success') {
@@ -166,6 +230,7 @@
 
     <AlipayQqWechatForm v-if="selectedGateway === Gateway.alipay_qq_wechat" />
     <template v-else>
+      <OtherGatewayForm v-if="selectedGateway === Gateway.other" @select-other-gateway="selectOtherGateway" />
       <div class="tn:flex tn:flex-col tn:gap-2">
         <div class="tn:text-sm tn:font-medium">{{ $t('web_add_funds_payment_amount') }}</div>
         <RadioButton
@@ -196,7 +261,13 @@
         class="tn:text-center tn:text-sm tn:leading-5.5 tn:opacity-60"
       />
 
-      <Button data-testid="funds-buy-credits-button" @click="buyCredits" fill :loading="loading" :disabled="isPayButtonDisabled">
+      <Button
+        data-testid="funds-buy-credits-button"
+        @click="buyCredits"
+        fill
+        :loading="loading"
+        :disabled="isPayButtonDisabled"
+      >
         {{ $t('web_add_funds_cta_button_buy_credits') }}
       </Button>
     </template>

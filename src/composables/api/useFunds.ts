@@ -10,7 +10,10 @@ import {
   type IStipePaymentIntentData,
   type IPaypalOrderData,
   type ICryptomusPaymentData,
-  type IStipePaymentIntentStatus
+  type IStipePaymentIntentStatus,
+  type IPayssionPaymentResponse,
+  type IPayssionPaymentStatusResponse,
+  PayssionPaymentStatus
 } from '@/types/api/funds'
 import type { ISuccessResponse } from '@/types/api'
 
@@ -36,6 +39,10 @@ export function useFunds() {
     {
       id: Gateway.alipay_qq_wechat,
       text: t('web_alipay_qq_we_chat')
+    },
+    {
+      id: Gateway.other,
+      text: t('web_method_dropdown_other')
     }
   ])
 
@@ -132,6 +139,35 @@ export function useFunds() {
     return null
   }
 
+  const createPayssionPayment = async (amount: number, pmId: string): Promise<boolean> => {
+    const baseAppUrl = `${import.meta.env.VITE_TEMP_NUMBER_FRONTEND_BASE_APP_URL ?? ''}`
+    let returnUrl = `${baseAppUrl}/funds`
+
+    const mobilePaymentReturnUrl = localStorage.getItem('mobilePaymentReturnUrl')
+    if (mobilePaymentReturnUrl) {
+      returnUrl = `${baseAppUrl}/payment/mobile`
+    }
+
+    const { data } = await post<IPayssionPaymentResponse>('/payssion-createPayment', {
+      amount,
+      pm_id: pmId,
+      return_url: returnUrl,
+      os: 'web'
+    })
+    if (data && data.redirect_url) {
+      window.location.href = data.redirect_url
+      return true
+    }
+    return false
+  }
+
+  const getPayssionPaymentStatus = async (transactionId: string): Promise<PayssionPaymentStatus | undefined> => {
+    const { data } = await post<IPayssionPaymentStatusResponse>('/payssion-getPaymentStatus', {
+      transaction_id: transactionId
+    })
+    if (data && data.status) return data.status
+  }
+
   return {
     gateways,
     enabledGateways,
@@ -142,6 +178,8 @@ export function useFunds() {
     capturePaypalOrder,
     createCryptomusPayment,
     getStripePaymentIntentStatus,
-    createAlipayQqWechatPayment
+    createAlipayQqWechatPayment,
+    createPayssionPayment,
+    getPayssionPaymentStatus
   }
 }

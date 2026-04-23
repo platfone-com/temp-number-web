@@ -1,6 +1,7 @@
 <script lang="ts" setup>
   import { ref, computed } from 'vue'
   import { OtherGateway, OtherGatewayName, type IOtherGatewayOption } from '@/types/api/funds'
+  import { useWlHelper } from '@/composables/wl/useWlHelper'
   import Select from '@/components/Shared/Select.vue'
 
   const ALL_OPTIONS: IOtherGatewayOption[] = [
@@ -46,7 +47,11 @@
     (e: 'selectOtherGateway', data: { provider: string; pm_id: string }): void
   }>()
 
-  const activeOtherGatewaysStr = import.meta.env.VITE_ACTIVE_OTHER_PAY_GATEWAYS || '[]'
+  const { isWlHelperUrl } = useWlHelper()
+
+  const activeOtherGatewaysStr = isWlHelperUrl()
+    ? import.meta.env.VITE_WL_ACTIVE_OTHER_PAY_GATEWAYS || '[]'
+    : import.meta.env.VITE_ACTIVE_OTHER_PAY_GATEWAYS || '[]'
   const activeOtherGateways: string[] = JSON.parse(activeOtherGatewaysStr)
 
   const availableOptions =

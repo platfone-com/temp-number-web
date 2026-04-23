@@ -16,6 +16,7 @@ interface ImportMetaEnv {
   readonly VITE_CRISP_WEBSITE_ID?: string
   readonly VITE_CSP_ENABLED?: '1' | '0'
   readonly VITE_ACTIVE_OTHER_PAY_GATEWAYS?: string
+  readonly VITE_WL_ACTIVE_OTHER_PAY_GATEWAYS?: string
 }
 
 interface ImportMeta {

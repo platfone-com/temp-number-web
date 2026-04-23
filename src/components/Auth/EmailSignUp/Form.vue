@@ -82,8 +82,20 @@
 
 <template>
   <form data-testid="auth-signup-form" @submit.prevent="createAccount" class="tn:mt-10 tn:flex tn:flex-col tn:gap-4">
-    <Input data-testid="auth-signup-email" v-model="email" :placeholder="$t('web_email_address')" :error-message="emailError" type="email" />
-    <Input data-testid="auth-signup-password" v-model="password" :placeholder="$t('web_password')" :error-message="passwordError" type="password" />
+    <Input
+      data-testid="auth-signup-email"
+      v-model="email"
+      :placeholder="$t('web_email_address')"
+      :error-message="emailError"
+      type="email"
+    />
+    <Input
+      data-testid="auth-signup-password"
+      v-model="password"
+      :placeholder="$t('web_password')"
+      :error-message="passwordError"
+      type="password"
+    />
     <Input
       data-testid="auth-signup-confirm-password"
       v-model="repeatPassword"

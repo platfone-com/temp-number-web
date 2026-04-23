@@ -41,7 +41,11 @@
 
 <template>
   <div>
-    <button data-testid="layout-sidebar-toggle" @click="openDrawer" class="tn:flex tn:cursor-pointer tn:items-center tn:py-2.5">
+    <button
+      data-testid="layout-sidebar-toggle"
+      @click="openDrawer"
+      class="tn:flex tn:cursor-pointer tn:items-center tn:py-2.5"
+    >
       <SidebarIcon class="tn:text-tn-black-950 tn:h-4 tn:w-6 tn:sm:h-5 tn:sm:w-7.5 tn:rtl:rotate-180" />
     </button>
 

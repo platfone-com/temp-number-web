@@ -54,7 +54,12 @@
         </router-link>
       </li>
       <li>
-        <router-link data-testid="layout-menu-numbers" @click="emit('closeSidebar')" :to="{ name: 'Numbers' }" :class="linkClasses">
+        <router-link
+          data-testid="layout-menu-numbers"
+          @click="emit('closeSidebar')"
+          :to="{ name: 'Numbers' }"
+          :class="linkClasses"
+        >
           <div class="tn:flex tn:w-full tn:items-center tn:justify-between">
             <div class="tn:flex tn:items-center tn:gap-4.5">
               <NumbersIcon class="tn:text-primary-900 tn:h-6 tn:w-6" />
@@ -94,7 +99,12 @@
         </component>
       </li>
       <li v-if="config.wlWidgetMode">
-        <router-link data-testid="layout-menu-transactions" @click="$emit('closeSidebar')" :to="{ name: 'Transactions' }" :class="linkClasses">
+        <router-link
+          data-testid="layout-menu-transactions"
+          @click="$emit('closeSidebar')"
+          :to="{ name: 'Transactions' }"
+          :class="linkClasses"
+        >
           <div class="tn:flex tn:w-full tn:items-center tn:justify-between">
             <div class="tn:flex tn:items-center tn:gap-4.5">
               <TransactionsWlIcon class="tn:text-primary-900 tn:h-6 tn:w-6" />

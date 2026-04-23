@@ -42,10 +42,22 @@
       </div>
 
       <div class="tn:flex tn:w-full tn:flex-col tn:gap-2 tn:lg:flex-row">
-        <Button data-testid="activation-price-changed-yes" @click="createActivationWithNewPrice" fill block :loading="orderLoading">
+        <Button
+          data-testid="activation-price-changed-yes"
+          @click="createActivationWithNewPrice"
+          fill
+          block
+          :loading="orderLoading"
+        >
           {{ $t('notifications_yes') }}
         </Button>
-        <Button data-testid="activation-price-changed-no" @click="activationPriceChangedModal = false" fill block color="secondary">
+        <Button
+          data-testid="activation-price-changed-no"
+          @click="activationPriceChangedModal = false"
+          fill
+          block
+          color="secondary"
+        >
           {{ $t('notifications_no') }}
         </Button>
       </div>

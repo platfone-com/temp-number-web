@@ -10,7 +10,14 @@
 </script>
 
 <template>
-  <Button data-testid="activation-order-number-button" fill class="tn:mt-6" block :loading="orderLoading" @click="() => createActivation()">
+  <Button
+    data-testid="activation-order-number-button"
+    fill
+    class="tn:mt-6"
+    block
+    :loading="orderLoading"
+    @click="() => createActivation()"
+  >
     {{ $t('web_order_number_cta_button') }}
   </Button>
 </template>

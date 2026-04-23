@@ -103,8 +103,20 @@
 
 <template>
   <form data-testid="auth-signin-form" @submit.prevent="signIn" class="tn:mt-10 tn:flex tn:flex-col tn:gap-4">
-    <Input data-testid="auth-signin-email" v-model="email" :placeholder="$t('web_email_address')" :error-message="emailError" type="email" />
-    <Input data-testid="auth-signin-password" v-model="password" :placeholder="$t('web_password')" :error-message="passwordError" type="password" />
+    <Input
+      data-testid="auth-signin-email"
+      v-model="email"
+      :placeholder="$t('web_email_address')"
+      :error-message="emailError"
+      type="email"
+    />
+    <Input
+      data-testid="auth-signin-password"
+      v-model="password"
+      :placeholder="$t('web_password')"
+      :error-message="passwordError"
+      type="password"
+    />
     <div class="tn:my-1 tn:flex tn:justify-end">
       <router-link
         :to="forgotPasswordHref"

@@ -9,21 +9,51 @@ export enum Gateway {
 }
 
 export enum OtherGateway {
+  payssion_test = 'payssion_test',
   pix_br = 'pix_br',
   kakaopay_kr = 'kakaopay_kr',
   alipay_cn = 'alipay_cn',
   unionpay_cn = 'unionpay_cn',
   toss_kr = 'toss_kr',
-  payssion_test = 'payssion_test'
+  qris_id = 'qris_id',
+  dana_id = 'dana_id',
+  ovo_id = 'ovo_id',
+  gcash_ph = 'gcash_ph',
+  grabpay_ph = 'grabpay_ph',
+  vietqr_vn = 'vietqr_vn',
+  truemoney_th = 'truemoney_th',
+  promptpay_th = 'promptpay_th',
+  boleto_br = 'boleto_br',
+  efecty_co = 'efecty_co',
+  oxxo_mx = 'oxxo_mx',
+  mercadopago_br = 'mercadopago_br',
+  nequi_co = 'nequi_co',
+  fpx_my = 'fpx_my',
+  spei_mx = 'spei_mx'
 }
 
 export const OtherGatewayName: Record<OtherGateway, string> = {
+  [OtherGateway.payssion_test]: 'Payssion Test',
   [OtherGateway.pix_br]: 'Pix',
   [OtherGateway.alipay_cn]: 'AliPay',
   [OtherGateway.unionpay_cn]: 'UnionPay',
   [OtherGateway.kakaopay_kr]: 'KakaoPay',
   [OtherGateway.toss_kr]: 'Toss',
-  [OtherGateway.payssion_test]: 'Payssion Test'
+  [OtherGateway.qris_id]: 'QRIS',
+  [OtherGateway.dana_id]: 'Dana',
+  [OtherGateway.ovo_id]: 'OVO',
+  [OtherGateway.gcash_ph]: 'Gcash',
+  [OtherGateway.grabpay_ph]: 'GrabPay',
+  [OtherGateway.vietqr_vn]: 'VietQR',
+  [OtherGateway.truemoney_th]: 'TrueMoney',
+  [OtherGateway.promptpay_th]: 'PromptPay',
+  [OtherGateway.boleto_br]: 'Boleto',
+  [OtherGateway.efecty_co]: 'Efecty',
+  [OtherGateway.oxxo_mx]: 'OXXO',
+  [OtherGateway.mercadopago_br]: 'Mercado Pago',
+  [OtherGateway.nequi_co]: 'Nequi',
+  [OtherGateway.fpx_my]: 'FPX',
+  [OtherGateway.spei_mx]: 'SPEI'
 }
 
 export enum PayssionPaymentStatus {

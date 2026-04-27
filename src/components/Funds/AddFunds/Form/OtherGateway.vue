@@ -6,6 +6,12 @@
 
   const ALL_OPTIONS: IOtherGatewayOption[] = [
     {
+      id: OtherGateway.payssion_test,
+      name: OtherGatewayName[OtherGateway.payssion_test],
+      provider: 'payssion',
+      pm_id: 'payssion_test'
+    },
+    {
       id: OtherGateway.pix_br,
       name: OtherGatewayName[OtherGateway.pix_br],
       provider: 'payssion',
@@ -36,10 +42,94 @@
       pm_id: 'toss_kr'
     },
     {
-      id: OtherGateway.payssion_test,
-      name: OtherGatewayName[OtherGateway.payssion_test],
+      id: OtherGateway.qris_id,
+      name: OtherGatewayName[OtherGateway.qris_id],
       provider: 'payssion',
-      pm_id: 'payssion_test'
+      pm_id: 'qris_id'
+    },
+    {
+      id: OtherGateway.dana_id,
+      name: OtherGatewayName[OtherGateway.dana_id],
+      provider: 'payssion',
+      pm_id: 'dana_id'
+    },
+    {
+      id: OtherGateway.ovo_id,
+      name: OtherGatewayName[OtherGateway.ovo_id],
+      provider: 'payssion',
+      pm_id: 'ovo_id'
+    },
+    {
+      id: OtherGateway.gcash_ph,
+      name: OtherGatewayName[OtherGateway.gcash_ph],
+      provider: 'payssion',
+      pm_id: 'gcash_ph'
+    },
+    {
+      id: OtherGateway.grabpay_ph,
+      name: OtherGatewayName[OtherGateway.grabpay_ph],
+      provider: 'payssion',
+      pm_id: 'grabpay_ph'
+    },
+    {
+      id: OtherGateway.vietqr_vn,
+      name: OtherGatewayName[OtherGateway.vietqr_vn],
+      provider: 'payssion',
+      pm_id: 'vietqr_vn'
+    },
+    {
+      id: OtherGateway.truemoney_th,
+      name: OtherGatewayName[OtherGateway.truemoney_th],
+      provider: 'payssion',
+      pm_id: 'truemoney_th'
+    },
+    {
+      id: OtherGateway.promptpay_th,
+      name: OtherGatewayName[OtherGateway.promptpay_th],
+      provider: 'payssion',
+      pm_id: 'promptpay_th'
+    },
+    {
+      id: OtherGateway.boleto_br,
+      name: OtherGatewayName[OtherGateway.boleto_br],
+      provider: 'payssion',
+      pm_id: 'boleto_br'
+    },
+    {
+      id: OtherGateway.efecty_co,
+      name: OtherGatewayName[OtherGateway.efecty_co],
+      provider: 'payssion',
+      pm_id: 'efecty_co'
+    },
+    {
+      id: OtherGateway.oxxo_mx,
+      name: OtherGatewayName[OtherGateway.oxxo_mx],
+      provider: 'payssion',
+      pm_id: 'oxxo_mx'
+    },
+    {
+      id: OtherGateway.mercadopago_br,
+      name: OtherGatewayName[OtherGateway.mercadopago_br],
+      provider: 'payssion',
+      pm_id: 'mercadopago_br'
+    },
+    {
+      id: OtherGateway.nequi_co,
+      name: OtherGatewayName[OtherGateway.nequi_co],
+      provider: 'payssion',
+      pm_id: 'nequi_co'
+    },
+    {
+      id: OtherGateway.fpx_my,
+      name: OtherGatewayName[OtherGateway.fpx_my],
+      provider: 'payssion',
+      pm_id: 'fpx_my'
+    },
+    {
+      id: OtherGateway.spei_mx,
+      name: OtherGatewayName[OtherGateway.spei_mx],
+      provider: 'payssion',
+      pm_id: 'spei_mx'
     }
   ]
 
@@ -77,6 +167,8 @@
       :selected="selectedOptionId"
       :items="selectItems"
       :placeholder="$t('web_other_gateway_placeholder')"
+      :max-visible-items="5"
+      searchable
       @select-item="selectOption"
     />
   </div>

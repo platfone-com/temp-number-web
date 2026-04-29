@@ -11,23 +11,20 @@ export enum Gateway {
 export enum OtherGateway {
   payssion_test = 'payssion_test',
   pix_br = 'pix_br',
+  picpay_br = 'picpay_br',
+  pagbank_br = 'pagbank_br',
   kakaopay_kr = 'kakaopay_kr',
   alipay_cn = 'alipay_cn',
   unionpay_cn = 'unionpay_cn',
-  toss_kr = 'toss_kr',
   qris_id = 'qris_id',
-  dana_id = 'dana_id',
   ovo_id = 'ovo_id',
   gcash_ph = 'gcash_ph',
   grabpay_ph = 'grabpay_ph',
   vietqr_vn = 'vietqr_vn',
-  truemoney_th = 'truemoney_th',
-  promptpay_th = 'promptpay_th',
   boleto_br = 'boleto_br',
   efecty_co = 'efecty_co',
+  pse_co = 'pse_co',
   oxxo_mx = 'oxxo_mx',
-  mercadopago_br = 'mercadopago_br',
-  nequi_co = 'nequi_co',
   fpx_my = 'fpx_my',
   spei_mx = 'spei_mx'
 }
@@ -35,23 +32,20 @@ export enum OtherGateway {
 export const OtherGatewayName: Record<OtherGateway, string> = {
   [OtherGateway.payssion_test]: 'Payssion Test',
   [OtherGateway.pix_br]: 'Pix',
+  [OtherGateway.picpay_br]: 'PicPay',
+  [OtherGateway.pagbank_br]: 'PagBank',
   [OtherGateway.alipay_cn]: 'AliPay',
   [OtherGateway.unionpay_cn]: 'UnionPay',
   [OtherGateway.kakaopay_kr]: 'KakaoPay',
-  [OtherGateway.toss_kr]: 'Toss',
   [OtherGateway.qris_id]: 'QRIS',
-  [OtherGateway.dana_id]: 'Dana',
   [OtherGateway.ovo_id]: 'OVO',
-  [OtherGateway.gcash_ph]: 'Gcash',
+  [OtherGateway.gcash_ph]: 'GCash',
   [OtherGateway.grabpay_ph]: 'GrabPay',
   [OtherGateway.vietqr_vn]: 'VietQR',
-  [OtherGateway.truemoney_th]: 'TrueMoney',
-  [OtherGateway.promptpay_th]: 'PromptPay',
   [OtherGateway.boleto_br]: 'Boleto',
   [OtherGateway.efecty_co]: 'Efecty',
+  [OtherGateway.pse_co]: 'PSE',
   [OtherGateway.oxxo_mx]: 'OXXO',
-  [OtherGateway.mercadopago_br]: 'Mercado Pago',
-  [OtherGateway.nequi_co]: 'Nequi',
   [OtherGateway.fpx_my]: 'FPX',
   [OtherGateway.spei_mx]: 'SPEI'
 }
@@ -61,14 +55,6 @@ export enum PayssionPaymentStatus {
   unpaid = 'unpaid',
   review = 'review',
   refunded = 'refunded'
-}
-
-export interface IPayssionPaymentRequest {
-  amount: number
-  pm_id: string
-  description?: string
-  return_url?: string
-  os?: string
 }
 
 export interface IPayssionPaymentResponse {

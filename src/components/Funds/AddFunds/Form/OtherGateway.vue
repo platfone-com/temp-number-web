@@ -18,6 +18,18 @@
       pm_id: 'pix_br'
     },
     {
+      id: OtherGateway.picpay_br,
+      name: OtherGatewayName[OtherGateway.picpay_br],
+      provider: 'payssion',
+      pm_id: 'picpay_br'
+    },
+    {
+      id: OtherGateway.pagbank_br,
+      name: OtherGatewayName[OtherGateway.pagbank_br],
+      provider: 'payssion',
+      pm_id: 'pagbank_br'
+    },
+    {
       id: OtherGateway.alipay_cn,
       name: OtherGatewayName[OtherGateway.alipay_cn],
       provider: 'payssion',
@@ -36,22 +48,10 @@
       pm_id: 'kakaopay_kr'
     },
     {
-      id: OtherGateway.toss_kr,
-      name: OtherGatewayName[OtherGateway.toss_kr],
-      provider: 'payssion',
-      pm_id: 'toss_kr'
-    },
-    {
       id: OtherGateway.qris_id,
       name: OtherGatewayName[OtherGateway.qris_id],
       provider: 'payssion',
       pm_id: 'qris_id'
-    },
-    {
-      id: OtherGateway.dana_id,
-      name: OtherGatewayName[OtherGateway.dana_id],
-      provider: 'payssion',
-      pm_id: 'dana_id'
     },
     {
       id: OtherGateway.ovo_id,
@@ -78,18 +78,6 @@
       pm_id: 'vietqr_vn'
     },
     {
-      id: OtherGateway.truemoney_th,
-      name: OtherGatewayName[OtherGateway.truemoney_th],
-      provider: 'payssion',
-      pm_id: 'truemoney_th'
-    },
-    {
-      id: OtherGateway.promptpay_th,
-      name: OtherGatewayName[OtherGateway.promptpay_th],
-      provider: 'payssion',
-      pm_id: 'promptpay_th'
-    },
-    {
       id: OtherGateway.boleto_br,
       name: OtherGatewayName[OtherGateway.boleto_br],
       provider: 'payssion',
@@ -102,22 +90,16 @@
       pm_id: 'efecty_co'
     },
     {
+      id: OtherGateway.pse_co,
+      name: OtherGatewayName[OtherGateway.pse_co],
+      provider: 'payssion',
+      pm_id: 'pse_co'
+    },
+    {
       id: OtherGateway.oxxo_mx,
       name: OtherGatewayName[OtherGateway.oxxo_mx],
       provider: 'payssion',
       pm_id: 'oxxo_mx'
-    },
-    {
-      id: OtherGateway.mercadopago_br,
-      name: OtherGatewayName[OtherGateway.mercadopago_br],
-      provider: 'payssion',
-      pm_id: 'mercadopago_br'
-    },
-    {
-      id: OtherGateway.nequi_co,
-      name: OtherGatewayName[OtherGateway.nequi_co],
-      provider: 'payssion',
-      pm_id: 'nequi_co'
     },
     {
       id: OtherGateway.fpx_my,

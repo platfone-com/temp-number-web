@@ -7,6 +7,7 @@ import svgLoader from 'vite-svg-loader'
 import { cspPlugin } from './csp.config'
 
 export default defineConfig({
+  cacheDir: 'node_modules/.vite-site',
   server: {
     port: 3300
   },

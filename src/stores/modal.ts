@@ -71,7 +71,8 @@ export const useModalStore = defineStore('modal', {
         status: false,
         finishTimestamp: 0
       },
-      reportCreationDeadlinePassedModal: false
+      reportCreationDeadlinePassedModal: false,
+      activationTimeoutModal: false
     }
   },
   actions: {

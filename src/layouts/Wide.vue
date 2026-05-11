@@ -8,6 +8,7 @@
   import Header from '@/components/Layout/Header/Index.vue'
   import AccountOnHoldModal from '@/components/Modals/AccountOnHold.vue'
   import ActivationPriceChangedModal from '@/components/Modals/Activation/PriceChanged.vue'
+  import ActivationTimeoutModal from '@/components/Modals/Activation/ActivationTimeout.vue'
   import ForceEmailConfirmationModal from '@/components/Modals/ForceEmailConfirmation.vue'
   import TooManyRequestsModal from '@/components/Modals/TooManyRequests.vue'
   import MobileMenu from '@/components/Layout/MobileMenu/Index.vue'
@@ -31,6 +32,7 @@
   <ForceEmailConfirmationModal v-if="!config.wlWidgetMode" />
   <AccountOnHoldModal />
   <ActivationPriceChangedModal />
+  <ActivationTimeoutModal />
   <TooManyRequestsModal />
 </template>
 

@@ -70,4 +70,5 @@ export interface ModalState {
     finishTimestamp: number
   }
   reportCreationDeadlinePassedModal: boolean
+  activationTimeoutModal: boolean
 }

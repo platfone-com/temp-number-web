@@ -35,7 +35,9 @@ export function useActivation() {
   const { isAuthenticated, isAuthPasswordProvider, isEmailVerified } = storeToRefs(useAuthStore())
   const { selectedService, selectedCountry, orderPrice, orderId } = storeToRefs(orderStore)
 
-  const createActivation = async (): Promise<void> => {
+  const ACTIVATION_TIMEOUT_MAX_RETRIES = 1
+
+  const createActivation = async (retryCount: number = 0): Promise<void> => {
     if (!selectedService.value || !selectedCountry.value || !orderPrice.value) return
     if (!isAuthenticated.value || (isAuthPasswordProvider.value && !isEmailVerified.value)) setForceOrderData()
     orderStore.orderLoading = true
@@ -129,6 +131,16 @@ export function useActivation() {
             ),
             buttonText: t('web_ok_button')
           })
+          break
+        case 408:
+          if (errorData?.orderId) {
+            orderStore.orderId = errorData.orderId
+          }
+          if (retryCount < ACTIVATION_TIMEOUT_MAX_RETRIES) {
+            await createActivation(retryCount + 1)
+          } else {
+            modalStore.activationTimeoutModal = true
+          }
           break
         case 409:
           const newPrice = errorData?.suggestedPrice

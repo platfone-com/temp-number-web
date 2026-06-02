@@ -14,7 +14,6 @@ if (process.env.PW_JUINT_ENABLED === '1') {
 }
 
 export default defineConfig({
-  testDir: './tests/e2e',
   testMatch: /.*\.spec\.ts/,
   testIgnore: ['**/dist/**', '**/build/**'],
   fullyParallel: true,
@@ -24,7 +23,6 @@ export default defineConfig({
   reporter: reporters,
 
   use: {
-    baseURL: process.env.PLAYWRIGHT_BASE_URL,
     locale: process.env.PLAYWRIGHT_LOCALE ?? 'en',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure'
@@ -32,8 +30,28 @@ export default defineConfig({
 
   projects: [
     {
+      name: 'e2e-whitelabel-manual',
+      testDir: './tests/e2e/e2e-whitelabel-manual',
+      use: {
+        ...devices['Desktop Chrome'],
+        baseURL: process.env.PLAYWRIGHT_WL_BASE_URL
+      }
+    },
+    {
+      name: 'e2e-sms-manual',
+      testDir: './tests/e2e/e2e-sms-manual',
+      use: {
+        ...devices['Desktop Chrome'],
+        baseURL: process.env.PLAYWRIGHT_SMS_BASE_URL
+      }
+    },
+    {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] }
+      testDir: './tests/e2e/e2e-sms-manual',
+      use: {
+        ...devices['Desktop Chrome'],
+        baseURL: process.env.PLAYWRIGHT_BASE_URL
+      }
     }
   ]
 })

@@ -46,3 +46,4 @@ playwright-report
 test-results
 tests/**/*.js
 playwright.config.js
+plan.md

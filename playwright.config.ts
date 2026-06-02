@@ -44,14 +44,6 @@ export default defineConfig({
         ...devices['Desktop Chrome'],
         baseURL: process.env.PLAYWRIGHT_SMS_BASE_URL
       }
-    },
-    {
-      name: 'chromium',
-      testDir: './tests/e2e',
-      use: {
-        ...devices['Desktop Chrome'],
-        baseURL: process.env.PLAYWRIGHT_BASE_URL
-      }
     }
   ]
 })

@@ -47,7 +47,7 @@ export default defineConfig({
     },
     {
       name: 'chromium',
-      testDir: './tests/e2e/e2e-sms-manual',
+      testDir: './tests/e2e',
       use: {
         ...devices['Desktop Chrome'],
         baseURL: process.env.PLAYWRIGHT_BASE_URL

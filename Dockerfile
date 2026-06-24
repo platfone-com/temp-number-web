@@ -1,4 +1,4 @@
-FROM node:22 AS build
+FROM node:24.17.0 AS build
 
 ARG VITE_FIREBASE_WEB_API_KEY
 ARG VITE_FIREBASE_AUTH_DOMAIN
@@ -38,3 +38,9 @@ WORKDIR /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY mime.types /etc/nginx/mime.types
 COPY --from=build /usr/src/app/dist/ ./app
+
+# Run as the unprivileged "nginx" user shipped with the base image. The pid file
+# is relocated to a user-writable path (see nginx.conf) and the served content
+# is made owned by that user.
+RUN chown -R nginx:nginx /usr/share/nginx/html /var/cache/nginx
+USER nginx

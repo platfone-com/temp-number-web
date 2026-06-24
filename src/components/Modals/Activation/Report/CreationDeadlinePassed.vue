@@ -39,6 +39,8 @@
           {{ $t('web_times_up') }}
         </div>
         <div :class="adaptiveModalSubheaderClasses()">
+          <!-- Renders a static i18n string; addBreakLinesToText only inserts <br />, no untrusted input. -->
+          <!-- nosemgrep: javascript.vue.security.audit.xss.templates.avoid-v-html.avoid-v-html -->
           <div
             v-html="addBreakLinesToText($t('web_you_can_report_a_number_only_in_the_first_hour_the_time_has_passed'))"
           />

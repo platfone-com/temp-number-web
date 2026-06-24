@@ -60,6 +60,8 @@
           {{ title }}
         </div>
         <div :class="adaptiveModalSubheaderClasses()">
+          <!-- Notification text is always set from trusted i18n strings (t()/parseTranslation), never raw server input. -->
+          <!-- nosemgrep: javascript.vue.security.audit.xss.templates.avoid-v-html.avoid-v-html -->
           <div v-if="typeof text === 'string'" v-html="text" />
           <TranslationText v-else @click="close" :segments="text" link-font-weight="tn:font-normal" />
         </div>

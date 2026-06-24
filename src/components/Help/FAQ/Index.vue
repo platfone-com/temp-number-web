@@ -95,6 +95,8 @@
           ref="panels"
           class="tn:text-tn-black-500 tn:overflow-hidden tn:text-sm tn:leading-[160%]"
         >
+          <!-- Renders FAQ answers built from static i18n strings via addBreakLinesToText; no untrusted input. -->
+          <!-- nosemgrep: javascript.vue.security.audit.xss.templates.avoid-v-html.avoid-v-html -->
           <div v-html="item.content" class="tn:px-5 tn:pt-4" />
         </div>
       </Transition>

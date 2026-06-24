@@ -22,6 +22,8 @@
   <div>
     <template v-for="(segment, index) in segments" :key="index">
       <template v-if="segment.type === 'text'">
+        <!-- Segment content is derived from trusted i18n strings (parseTranslation); only <br /> markup is added. -->
+        <!-- nosemgrep: javascript.vue.security.audit.xss.templates.avoid-v-html.avoid-v-html -->
         <span v-html="segment.content"></span>
       </template>
       <template v-else-if="segment.type === 'link' && segment.to">

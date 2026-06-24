@@ -20,6 +20,8 @@
 <template>
   <Header :text="$t('web_create_account')" font-class="tn:text-2xl tn:leading-7.5 tn:tracking-tightest" />
   <SubHeader font-class="tn:text-sm tn:leading-6">
+    <!-- Renders a static i18n string; addBreakLinesToText only inserts <br />, no untrusted input. -->
+    <!-- nosemgrep: javascript.vue.security.audit.xss.templates.avoid-v-html.avoid-v-html -->
     <span v-html="addBreakLinesToText($t('web_it_will_allow_saving_history_and_sync_with_another_device_easily'))" />
   </SubHeader>
 

@@ -38,6 +38,8 @@
     <div data-testid="activation-price-changed-modal" :class="adaptiveModalWrapperClasses()">
       <div>
         <div :class="adaptiveModalHeaderClasses()">{{ $t('notifications_price_change') }}</div>
+        <!-- modalText embeds only a numeric price into a trusted i18n string; no untrusted markup. -->
+        <!-- nosemgrep: javascript.vue.security.audit.xss.templates.avoid-v-html.avoid-v-html -->
         <div v-html="modalText" :class="adaptiveModalSubheaderClasses()" />
       </div>
 

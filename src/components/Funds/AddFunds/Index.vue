@@ -256,6 +256,8 @@
         />
       </div>
 
+      <!-- Renders a static i18n string; addBreakLinesToText only inserts <br />, no untrusted input. -->
+      <!-- nosemgrep: javascript.vue.security.audit.xss.templates.avoid-v-html.avoid-v-html -->
       <div
         v-html="addBreakLinesToText($t('web_add_funds_notict_balance_in_usd_1_credit_1_usd'))"
         class="tn:text-center tn:text-sm tn:leading-5.5 tn:opacity-60"

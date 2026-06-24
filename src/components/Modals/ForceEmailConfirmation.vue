@@ -26,11 +26,18 @@
   const { forceEmailConfirmationModal } = storeToRefs(useModalStore())
   const loading = ref(false)
   const isWlPage = computed(() => isWlHelperUrl())
+  const escapeHtml = (value: string): string =>
+    value
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;')
   const modalText = computed(() => {
     const email = auth.currentUser && auth.currentUser.email ? auth.currentUser.email : ''
     return addBreakLinesToText(
       t('notifications_please_click_on_the_verification_link_we_have_sent_to_your_email_b_0_b')
-    ).replace('__0__', `<strong>${email}</strong>`)
+    ).replace('__0__', `<strong>${escapeHtml(email)}</strong>`)
   })
 
   const signOut = async () => {
@@ -54,6 +61,8 @@
       <div>
         <div :class="adaptiveModalHeaderClasses()">{{ $t('notifications_verify_your_email') }}</div>
         <div :class="adaptiveModalSubheaderClasses()">
+          <!-- modalText is a trusted i18n string; the only interpolated value (user email) is HTML-escaped above. -->
+          <!-- nosemgrep: javascript.vue.security.audit.xss.templates.avoid-v-html.avoid-v-html -->
           <div v-html="modalText" />
         </div>
       </div>

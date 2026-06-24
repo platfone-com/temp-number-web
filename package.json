@@ -69,6 +69,7 @@
   },
   "overrides": {
     "@tailwindcss/node": "4.0.5",
-    "@tailwindcss/oxide": "4.0.5"
+    "@tailwindcss/oxide": "4.0.5",
+    "protobufjs": "7.5.5"
   }
 }

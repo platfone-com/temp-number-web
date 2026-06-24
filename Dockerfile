@@ -34,7 +34,7 @@ USER node
 CMD ["npm", "start"]
 
 FROM nginx:alpine
-EXPOSE 80
+EXPOSE 8080
 WORKDIR /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY mime.types /etc/nginx/mime.types
@@ -43,5 +43,5 @@ COPY --from=build /usr/src/app/dist/ ./app
 # Run as the unprivileged "nginx" user shipped with the base image. The pid file
 # is relocated to a user-writable path (see nginx.conf) and the served content
 # is made owned by that user.
-RUN chown -R nginx:nginx /usr/share/nginx/html /var/cache/nginx
+RUN chown -R nginx:nginx /usr/share/nginx/html /var/cache/nginx /var/log/nginx
 USER nginx

@@ -30,6 +30,9 @@ RUN npx update-browserslist-db@latest && npm install
 COPY . .
 RUN npm run build
 
+USER node
+CMD ["npm", "start"]
+
 FROM nginx:alpine
 EXPOSE 80
 WORKDIR /usr/share/nginx/html

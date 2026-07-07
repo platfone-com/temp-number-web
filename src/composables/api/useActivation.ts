@@ -62,10 +62,12 @@ export function useActivation() {
     if (!isAuthenticated.value || (isAuthPasswordProvider.value && !isEmailVerified.value)) setForceOrderData()
 
     orderStore.orderLoading = true
-    if (isAuthenticated.value && userStore.totalBalance !== null && userStore.totalBalance < orderPrice.value) {
+    const cachedAvailableBalance =
+      userStore.totalBalance !== null ? userStore.totalBalance - (userStore.reservedBalance ?? 0) : null
+    if (isAuthenticated.value && cachedAvailableBalance !== null && cachedAvailableBalance < orderPrice.value) {
       const freshBalance = await getBalance()
       if (freshBalance) userStore.setBalance(freshBalance)
-      if (freshBalance && freshBalance.total < orderPrice.value) {
+      if (freshBalance && freshBalance.total - (freshBalance.reserved ?? 0) < orderPrice.value) {
         showInsufficientFundsModal()
         orderStore.orderLoading = false
         return

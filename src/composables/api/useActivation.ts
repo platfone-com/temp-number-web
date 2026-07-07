@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n'
 import config from '@/config'
 import { useApi } from '@/composables/api/useApi'
 import { useAuthStore } from '@/stores/auth'
+import { useUserStore } from '@/stores/user'
 import { useOrderStore } from '@/stores/order'
 import { useModalStore } from '@/stores/modal'
 import { useToastStore } from '@/stores/toast'
@@ -22,9 +23,10 @@ export function useActivation() {
   const router = useRouter()
   const { t } = useI18n()
   const { get, post, put } = useApi()
-  const { restartCheckBalance } = useBalance()
+  const { restartCheckBalance, getBalance } = useBalance()
   const { showSomethingWrongModal } = useHelper()
   const orderStore = useOrderStore()
+  const userStore = useUserStore()
   const modalStore = useModalStore()
   const toast = useToastStore()
   const { windowWidth, lgBreakpoint } = useWindowWidth()
@@ -37,10 +39,39 @@ export function useActivation() {
 
   const ACTIVATION_TIMEOUT_MAX_RETRIES = 1
 
+  const showInsufficientFundsModal = () => {
+    setForceOrderData()
+    const modalOptions: {
+      title: string
+      text: string
+      buttonText: string
+      buttonRouteName?: string
+      buttonHref?: string
+    } = {
+      title: t('notifications_not_enough_funds'),
+      text: t('notifications_top_up_your_balance_to_proceed'),
+      buttonText: t('web_add_funds_button_on_desktop')
+    }
+    if (config.wlWidgetMode) modalOptions.buttonHref = wlHelperFundsUrl.value
+    else modalOptions.buttonRouteName = 'Funds'
+    modalStore.setNotification(true, modalOptions)
+  }
+
   const createActivation = async (retryCount: number = 0): Promise<void> => {
     if (!selectedService.value || !selectedCountry.value || !orderPrice.value) return
     if (!isAuthenticated.value || (isAuthPasswordProvider.value && !isEmailVerified.value)) setForceOrderData()
+
     orderStore.orderLoading = true
+    if (isAuthenticated.value && userStore.totalBalance !== null && userStore.totalBalance < orderPrice.value) {
+      const freshBalance = await getBalance()
+      if (freshBalance) userStore.setBalance(freshBalance)
+      if (freshBalance && freshBalance.total < orderPrice.value) {
+        showInsufficientFundsModal()
+        orderStore.orderLoading = false
+        return
+      }
+    }
+
     const apiPathUrl = config.wlWidgetMode ? '/activation' : '/app-createActivation'
     const requestData: {
       service_id: string
@@ -99,21 +130,7 @@ export function useActivation() {
       const errorData = error.data as IErrorResponseData
       switch (error.status) {
         case 402:
-          setForceOrderData()
-          const modalOptions: {
-            title: string
-            text: string
-            buttonText: string
-            buttonRouteName?: string
-            buttonHref?: string
-          } = {
-            title: t('notifications_not_enough_funds'),
-            text: t('notifications_top_up_your_balance_to_proceed'),
-            buttonText: t('web_add_funds_button_on_desktop')
-          }
-          if (config.wlWidgetMode) modalOptions.buttonHref = wlHelperFundsUrl.value
-          else modalOptions.buttonRouteName = 'Funds'
-          modalStore.setNotification(true, modalOptions)
+          showInsufficientFundsModal()
           break
         case 404:
           const contactUsLink =
